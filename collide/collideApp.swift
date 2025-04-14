@@ -11,7 +11,7 @@ import SwiftUI
 struct collideApp: App {
     var body: some Scene {
         WindowGroup {
-            Home()
+            NavBar()
         }
     }
 }
