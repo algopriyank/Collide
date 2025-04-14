@@ -65,18 +65,21 @@ struct Swipe: Codable, Identifiable {
 // MARK: - Match
 struct Match: Codable, Identifiable {
     let id: String
-    let user1Id: String
-    let user2Id: String
+    let user1Id: Int
+    let user2Id: Int
     let matchedOn: String
+    let user1: UserModel
+    let user2: UserModel
     
     enum CodingKeys: String, CodingKey {
         case id
         case user1Id = "user1_id"
         case user2Id = "user2_id"
         case matchedOn = "matched_on"
+        case user1
+        case user2
     }
 }
-
 // MARK: - Review
 struct Review: Codable, Identifiable {
     let id: String

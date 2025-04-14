@@ -47,6 +47,46 @@ class WebService {
         }.resume()
     }
     
+    //MARK: - Fetch matches
+    
+    func fetchMatches(for userId: Int, completion: @escaping (Result<[UserModel], Error>) -> Void) {
+        let query = "matches?or=(user1_id.eq.\(userId),user2_id.eq.\(userId))&select=*,user1:users!matches_user1_id_fkey(*),user2:users!matches_user2_id_fkey(*)"
+        guard let url = URL(string: baseURL + query) else {
+            return completion(.failure(NetworkError.invalidURL))
+        }
+        
+        var request = URLRequest(url: url)
+        defaultHeaders.forEach { request.setValue($0.value, forHTTPHeaderField: $0.key) }
+        
+        URLSession.shared.dataTask(with: request) { data, _, error in
+            if let error = error {
+                return completion(.failure(error))
+            }
+            
+            guard let data = data else {
+                return completion(.failure(NetworkError.noData))
+            }
+            
+            do {
+                let matches = try JSONDecoder().decode([Match].self, from: data)
+                
+                    // Extract the opposite user (not current user)
+                let matchedUsers = matches.map { match in
+                    return match.user1Id == userId ? match.user2 : match.user1
+                }
+                
+                DispatchQueue.main.async {
+                    completion(.success(matchedUsers))
+                }
+            } catch {
+                print("❌ Decode error: \(error)")
+                print(String(data: data, encoding: .utf8) ?? "No raw data")
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+            }
+        }.resume()
+    }
         // You can add more endpoints below:
         // - fetchUser(by id)
         // - fetchMatches(for userId)
