@@ -1,3 +1,4 @@
+    // Update your imports
 import Foundation
 
 class WebService {
@@ -5,7 +6,7 @@ class WebService {
     private init() {}
     
     private let baseURL = "https://elxkzdrcyloubqhwiuuu.supabase.co/rest/v1/"
-    private let apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVseGt6ZHJjeWxvdWJxaHdpdXV1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5MzI2MDEsImV4cCI6MjA1OTUwODYwMX0.835jbXGwqRA8aSI6LIiczBshfOOYUBRrZNnhHgRmlcM" // Keep this secure
+    private let apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVseGt6ZHJjeWxvdWJxaHdpdXV1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5MzI2MDEsImV4cCI6MjA1OTUwODYwMX0.835jbXGwqRA8aSI6LIiczBshfOOYUBRrZNnhHgRmlcM"
     
     private var defaultHeaders: [String: String] {
         [
@@ -15,10 +16,9 @@ class WebService {
         ]
     }
     
-    // MARK: - Fetch All Users
-    func fetchAllUsers(completion: @escaping (Result<[UserModel], Error>) -> Void) {
+    func fetchAllUsers(completion: @escaping (Result<[UserModel], AppError>) -> Void) {
         guard let url = URL(string: baseURL + "users?select=*,photos(*)") else {
-            completion(.failure(NetworkError.invalidURL))
+            completion(.failure(.invalidURL))
             return
         }
         
@@ -26,12 +26,26 @@ class WebService {
         defaultHeaders.forEach { request.setValue($0.value, forHTTPHeaderField: $0.key) }
         
         URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error as? URLError {
+                switch error.code {
+                case .notConnectedToInternet:
+                    completion(.failure(.noInternet))
+                case .timedOut:
+                    completion(.failure(.timeout))
+                default:
+                    completion(.failure(.underlying(error)))
+                }
+                return
+            }
+            
             if let error = error {
-                return completion(.failure(error))
+                completion(.failure(.underlying(error)))
+                return
             }
             
             guard let data = data else {
-                return completion(.failure(NetworkError.noData))
+                completion(.failure(.noData))
+                return
             }
             
             do {
@@ -41,68 +55,43 @@ class WebService {
                 }
             } catch {
                 DispatchQueue.main.async {
-                    completion(.failure(error))
+                    completion(.failure(.decodingError(error)))
                 }
             }
         }.resume()
     }
     
-    //MARK: - Fetch matches
-    
-    func fetchMatches(for userId: Int, completion: @escaping (Result<[UserModel], Error>) -> Void) {
+    func fetchMatches(for userId: Int, completion: @escaping (Result<[UserModel], AppError>) -> Void) {
         let query = "matches?or=(user1_id.eq.\(userId),user2_id.eq.\(userId))&select=*,user1:users!matches_user1_id_fkey(*),user2:users!matches_user2_id_fkey(*)"
+        
         guard let url = URL(string: baseURL + query) else {
-            return completion(.failure(NetworkError.invalidURL))
+            completion(.failure(.invalidURL))
+            return
         }
         
         var request = URLRequest(url: url)
         defaultHeaders.forEach { request.setValue($0.value, forHTTPHeaderField: $0.key) }
         
-        URLSession.shared.dataTask(with: request) { data, _, error in
+        URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
-                return completion(.failure(error))
+                completion(.failure(.underlying(error)))
+                return
             }
             
             guard let data = data else {
-                return completion(.failure(NetworkError.noData))
+                completion(.failure(.noData))
+                return
             }
             
             do {
                 let matches = try JSONDecoder().decode([Match].self, from: data)
-                
-                    // Extract the opposite user (not current user)
-                let matchedUsers = matches.map { match in
-                    return match.user1Id == userId ? match.user2 : match.user1
-                }
-                
+                let matchedUsers = matches.map { $0.user1Id == userId ? $0.user2 : $0.user1 }
                 DispatchQueue.main.async {
                     completion(.success(matchedUsers))
                 }
             } catch {
-                print("❌ Decode error: \(error)")
-                print(String(data: data, encoding: .utf8) ?? "No raw data")
-                DispatchQueue.main.async {
-                    completion(.failure(error))
-                }
+                completion(.failure(.decodingError(error)))
             }
         }.resume()
-    }
-        // You can add more endpoints below:
-        // - fetchUser(by id)
-        // - fetchMatches(for userId)
-        // - sendSwipe(...)
-        // - submitReview(...)
-}
-
-// MARK: - Network Errors
-enum NetworkError: Error, LocalizedError {
-    case invalidURL
-    case noData
-    
-    var errorDescription: String? {
-        switch self {
-        case .invalidURL: return "Invalid URL"
-        case .noData: return "No data received from server"
-        }
     }
 }

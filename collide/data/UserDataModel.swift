@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 // MARK: - User Model
-struct UserModel: Codable, Identifiable {
+struct UserModel: Identifiable, Codable, Hashable {
     let id: Int
     let name: String
     let avatar: String? // Profile picture URL
@@ -27,7 +27,7 @@ struct UserModel: Codable, Identifiable {
 }
 
 // MARK: - Photo
-struct Photo: Codable, Identifiable {
+struct Photo: Codable, Identifiable, Hashable {
     let id: Int
     let userId: Int
     let photoUrl: String
@@ -40,13 +40,13 @@ struct Photo: Codable, Identifiable {
 }
 
 // MARK: - Interest
-struct Interest: Codable, Identifiable {
+struct Interest: Codable, Identifiable, Hashable  {
     let id: String
     let name: String
 }
 
 // MARK: - Swipe
-struct Swipe: Codable, Identifiable {
+struct Swipe: Codable, Identifiable, Hashable  {
     let id: String
     let swiperId: String
     let swipeeId: String
@@ -63,7 +63,7 @@ struct Swipe: Codable, Identifiable {
 }
 
 // MARK: - Match
-struct Match: Codable, Identifiable {
+struct Match: Codable, Identifiable, Hashable  {
     let id: String
     let user1Id: Int
     let user2Id: Int
@@ -81,7 +81,7 @@ struct Match: Codable, Identifiable {
     }
 }
 // MARK: - Review
-struct Review: Codable, Identifiable {
+struct Review: Codable, Identifiable, Hashable  {
     let id: String
     let reviewerId: String
     let reviewedId: String
@@ -96,5 +96,25 @@ struct Review: Codable, Identifiable {
         case reviewText = "review_text"
         case rating
         case createdAt = "created_at"
+    }
+}
+
+
+extension UserModel {
+    static var mock: UserModel {
+        UserModel(
+            id: 1,
+            name: "Simaran kaur",
+            avatar: "https://cloudflare-ipfs.com/ipfs/.../avatar/610.jpg",
+            age: 19,
+            gender: "Female",
+            bio: "Foodie & travel junkie. Let's explore together!",
+            college: "DY Patil, Mumbai",
+            lastActive: "2024-04-29T03:07:48.099",
+            verified: true,
+            photos: [
+                Photo(id: 1, userId: 1, photoUrl: "https://storage.googleapis.com/collide-images-bucket/simran_kaur.jpg")
+            ]
+        )
     }
 }

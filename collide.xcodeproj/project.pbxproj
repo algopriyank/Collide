@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C1FD73F2DAE765B008B254C /* ProfileCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1FD73E2DAE765A008B254C /* ProfileCard.swift */; };
+		4C54344F2DAD0B3F00FAAEFB /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C54344E2DAD0B3F00FAAEFB /* AppError.swift */; };
 		4C98FDFE2DABE6DE00601764 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C98FDEA2DABE6DE00601764 /* Preview Assets.xcassets */; };
 		4C98FDFF2DABE6DE00601764 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C98FDFB2DABE6DE00601764 /* Assets.xcassets */; };
 		4C98FE002DABE6DE00601764 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98FDE62DABE6DE00601764 /* UserDataModel.swift */; };
 		4C98FE012DABE6DE00601764 /* WebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98FDE82DABE6DE00601764 /* WebServices.swift */; };
 		4C98FE022DABE6DE00601764 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98FDEC2DABE6DE00601764 /* HomeViewModel.swift */; };
-		4C98FE032DABE6DE00601764 /* DraggableCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98FDEE2DABE6DE00601764 /* DraggableCardView.swift */; };
 		4C98FE042DABE6DE00601764 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98FDEF2DABE6DE00601764 /* Home.swift */; };
-		4C98FE052DABE6DE00601764 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98FDF02DABE6DE00601764 /* ProfileImageView.swift */; };
 		4C98FE062DABE6DE00601764 /* SizeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98FDF12DABE6DE00601764 /* SizeConstants.swift */; };
 		4C98FE072DABE6DE00601764 /* SwipeActionIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98FDF22DABE6DE00601764 /* SwipeActionIndicatorView.swift */; };
 		4C98FE082DABE6DE00601764 /* Matches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98FDF42DABE6DE00601764 /* Matches.swift */; };
@@ -23,16 +23,18 @@
 		4C98FE0B2DABE6DE00601764 /* NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98FDF82DABE6DE00601764 /* NavBar.swift */; };
 		4C98FE0C2DABE6DE00601764 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98FDF92DABE6DE00601764 /* Profile.swift */; };
 		4C98FE0D2DABE6DE00601764 /* collideApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98FDFC2DABE6DE00601764 /* collideApp.swift */; };
+		4CF09A382DAD1195001B0D38 /* ProfileCardDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF09A372DAD1195001B0D38 /* ProfileCardDetail.swift */; };
+		4CF09A3A2DAD1EF5001B0D38 /* CachedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF09A392DAD1EF5001B0D38 /* CachedImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C1FD73E2DAE765A008B254C /* ProfileCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCard.swift; sourceTree = "<group>"; };
+		4C54344E2DAD0B3F00FAAEFB /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		4C98FDE62DABE6DE00601764 /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
 		4C98FDE82DABE6DE00601764 /* WebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServices.swift; sourceTree = "<group>"; };
 		4C98FDEA2DABE6DE00601764 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4C98FDEC2DABE6DE00601764 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		4C98FDEE2DABE6DE00601764 /* DraggableCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableCardView.swift; sourceTree = "<group>"; };
 		4C98FDEF2DABE6DE00601764 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
-		4C98FDF02DABE6DE00601764 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		4C98FDF12DABE6DE00601764 /* SizeConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeConstants.swift; sourceTree = "<group>"; };
 		4C98FDF22DABE6DE00601764 /* SwipeActionIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeActionIndicatorView.swift; sourceTree = "<group>"; };
 		4C98FDF42DABE6DE00601764 /* Matches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matches.swift; sourceTree = "<group>"; };
@@ -43,6 +45,8 @@
 		4C98FDFB2DABE6DE00601764 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C98FDFC2DABE6DE00601764 /* collideApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = collideApp.swift; sourceTree = "<group>"; };
 		4CCCB7342DA3CD4B009FCE1E /* collide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = collide.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CF09A372DAD1195001B0D38 /* ProfileCardDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCardDetail.swift; sourceTree = "<group>"; };
+		4CF09A392DAD1EF5001B0D38 /* CachedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				4C98FDE82DABE6DE00601764 /* WebServices.swift */,
+				4C54344E2DAD0B3F00FAAEFB /* AppError.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -93,10 +98,10 @@
 			isa = PBXGroup;
 			children = (
 				4C98FDEF2DABE6DE00601764 /* Home.swift */,
-				4C98FDEE2DABE6DE00601764 /* DraggableCardView.swift */,
-				4C98FDF02DABE6DE00601764 /* ProfileImageView.swift */,
-				4C98FDF12DABE6DE00601764 /* SizeConstants.swift */,
+				4C1FD73E2DAE765A008B254C /* ProfileCard.swift */,
+				4CF09A372DAD1195001B0D38 /* ProfileCardDetail.swift */,
 				4C98FDF22DABE6DE00601764 /* SwipeActionIndicatorView.swift */,
+				4C98FDF12DABE6DE00601764 /* SizeConstants.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -118,6 +123,7 @@
 				4C98FDF72DABE6DE00601764 /* Messages.swift */,
 				4C98FDF82DABE6DE00601764 /* NavBar.swift */,
 				4C98FDF92DABE6DE00601764 /* Profile.swift */,
+				4CF09A392DAD1EF5001B0D38 /* CachedImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -130,7 +136,6 @@
 				4C98FDED2DABE6DE00601764 /* View Models */,
 				4C98FDE92DABE6DE00601764 /* Networking */,
 				4C98FDEB2DABE6DE00601764 /* Preview Content */,
-				4C98FDFC2DABE6DE00601764 /* collideApp.swift */,
 			);
 			path = collide;
 			sourceTree = "<group>";
@@ -138,6 +143,7 @@
 		4CCCB72B2DA3CD4B009FCE1E = {
 			isa = PBXGroup;
 			children = (
+				4C98FDFC2DABE6DE00601764 /* collideApp.swift */,
 				4C98FDFD2DABE6DE00601764 /* collide */,
 				4CCCB7352DA3CD4B009FCE1E /* Products */,
 			);
@@ -226,18 +232,20 @@
 			files = (
 				4C98FE002DABE6DE00601764 /* UserDataModel.swift in Sources */,
 				4C98FE012DABE6DE00601764 /* WebServices.swift in Sources */,
+				4C1FD73F2DAE765B008B254C /* ProfileCard.swift in Sources */,
+				4C54344F2DAD0B3F00FAAEFB /* AppError.swift in Sources */,
 				4C98FE022DABE6DE00601764 /* HomeViewModel.swift in Sources */,
-				4C98FE032DABE6DE00601764 /* DraggableCardView.swift in Sources */,
 				4C98FE042DABE6DE00601764 /* Home.swift in Sources */,
-				4C98FE052DABE6DE00601764 /* ProfileImageView.swift in Sources */,
 				4C98FE062DABE6DE00601764 /* SizeConstants.swift in Sources */,
 				4C98FE072DABE6DE00601764 /* SwipeActionIndicatorView.swift in Sources */,
 				4C98FE082DABE6DE00601764 /* Matches.swift in Sources */,
 				4C98FE092DABE6DE00601764 /* Events.swift in Sources */,
 				4C98FE0A2DABE6DE00601764 /* Messages.swift in Sources */,
+				4CF09A3A2DAD1EF5001B0D38 /* CachedImageView.swift in Sources */,
 				4C98FE0B2DABE6DE00601764 /* NavBar.swift in Sources */,
 				4C98FE0C2DABE6DE00601764 /* Profile.swift in Sources */,
 				4C98FE0D2DABE6DE00601764 /* collideApp.swift in Sources */,
+				4CF09A382DAD1195001B0D38 /* ProfileCardDetail.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,7 +304,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -353,7 +361,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -374,11 +382,13 @@
 				DEVELOPMENT_TEAM = LCK7YUA38D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Collide.;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -403,11 +413,13 @@
 				DEVELOPMENT_TEAM = LCK7YUA38D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Collide.;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
