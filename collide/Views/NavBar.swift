@@ -6,7 +6,7 @@ struct NavBar: View {
             Messages()
                 .tabItem {
                     Label("Messages", systemImage: "message")
-                }.symbolEffect(.bounce)
+                }
             
             Events()
                 .tabItem {
@@ -18,9 +18,9 @@ struct NavBar: View {
                     Label("Home", systemImage: "house")
                 }
             
-            Matches()
+            ProfileCardDetail(user: UserModel.mock)
                 .tabItem {
-                    Label("Matches", systemImage: "heart")
+                    Label("Details", systemImage: "heart")
                 }
             
             Profile()
@@ -31,6 +31,7 @@ struct NavBar: View {
         .tint(.pink.opacity(0.8)) // Accent color for selected tab
     }
 }
+
 #Preview {
     NavBar()
 }

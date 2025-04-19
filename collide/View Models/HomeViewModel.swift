@@ -1,32 +1,20 @@
-//
-//  HomeViewModel.swift
-//  collide
-//
-//  Created by Priyank Sharma on 07/04/25.
-//
 import Foundation
 
 class HomeViewModel: ObservableObject {
     @Published var users: [UserModel] = []
     @Published var errorMessage: String?
-    
-    var errorIcon: String {
-        if errorMessage?.contains("Internet") == true {
-            return "wifi.exclamationmark"
-        } else if errorMessage?.contains("Invalid URL") == true {
-            return "link.badge.minus"
-        } else {
-            return "exclamationmark.triangle.fill"
-        }
-    }
+    @Published var errorIcon: String = ""
     
     func fetchUsers() {
         WebService.shared.fetchAllUsers { result in
             switch result {
             case .success(let users):
                 self.users = users
+                self.errorMessage = nil
             case .failure(let error):
-                self.errorMessage = error.localizedDescription
+                error.logDetails() // Logs full detail in console
+                self.errorMessage = error.userMessage
+                self.errorIcon = error.iconName
             }
         }
     }
