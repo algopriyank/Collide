@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct Home: View {
+    @Namespace private var transitionNamespace
     @StateObject private var viewModel = HomeViewModel()
     
     var body: some View {
@@ -13,13 +14,21 @@ struct Home: View {
                     
                     Spacer()
                     
-                    content
+                    NavigationLink (value: viewModel.users.first) {
+                        content
+                    }
                     
                     Spacer()
                 }
                 .padding()
                 .onAppear {
-                    viewModel.fetchUsers()
+                    if viewModel.users.isEmpty {
+                        viewModel.fetchUsers()
+                    }
+                }
+                .navigationDestination(for: UserModel.self) { user in
+                    ProfileCardDetail(user: user)
+                        .navigationTransition(.zoom(sourceID: user, in: transitionNamespace))
                 }
             }
         }
@@ -112,7 +121,9 @@ private extension Home {
                     withAnimation {
                         viewModel.users.removeAll { $0.id == user.id }
                     }
-                })
+                },
+                    namespace: transitionNamespace
+                )
             }
         }
         .padding(.horizontal)
