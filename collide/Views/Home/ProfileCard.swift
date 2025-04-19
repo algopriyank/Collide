@@ -12,6 +12,7 @@ struct ProfileCard: View {
     
     let user: UserModel
     var onRemove: () -> Void
+    let namespace: Namespace.ID
     
     var body: some View {
         cardContent
@@ -34,6 +35,7 @@ struct ProfileCard: View {
             if let url = URL(string: photoUrl) {
                 CachedAsyncImage(url: url)
                     .scaledToFill()
+                    .matchedTransitionSource(id: user, in: namespace)
                     .frame(width: 360, height: 540)
                     .cornerRadius(24)
                 

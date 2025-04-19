@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct ProfileCardDetail: View {
+    @Environment(\.dismiss) var dismiss
+    
     let user: UserModel
     
     var photoUrl: String {
@@ -66,9 +68,10 @@ struct ProfileCardDetail: View {
                 }
             }
             .ignoresSafeArea(edges: .top)
+            .navigationBarBackButtonHidden(true)
             .toolbar {
                 Button {
-                        // Add dismiss action
+                        dismiss()
                 } label: {
                     Image(systemName: "xmark.circle.fill")
                         .font(.title3)
