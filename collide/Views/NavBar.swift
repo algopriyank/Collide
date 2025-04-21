@@ -23,12 +23,12 @@ struct NavBar: View {
                     Label("Details", systemImage: "heart")
                 }
             
-            Profile()
+            ProfileView(user: UserModel.mock)
                 .tabItem {
                     Label("Profile", systemImage: "person")
                 }
         }
-        .tint(.pink.opacity(0.8)) // Accent color for selected tab
+        .tint(.indigo) // Accent color for selected tab
     }
 }
 

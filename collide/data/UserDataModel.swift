@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 // MARK: - User Model
-struct UserModel: Identifiable, Codable, Hashable {
+struct UserModel: Identifiable, Codable, Hashable, Sendable {
     let id: Int
     let name: String
     let avatar: String? // Profile picture URL
@@ -27,7 +27,7 @@ struct UserModel: Identifiable, Codable, Hashable {
 }
 
 // MARK: - Photo
-struct Photo: Codable, Identifiable, Hashable {
+struct Photo: Codable, Identifiable, Hashable, Sendable {
     let id: Int
     let userId: Int
     let photoUrl: String
@@ -40,13 +40,13 @@ struct Photo: Codable, Identifiable, Hashable {
 }
 
 // MARK: - Interest
-struct Interest: Codable, Identifiable, Hashable  {
+struct Interest: Codable, Identifiable, Hashable, Sendable  {
     let id: String
     let name: String
 }
 
 // MARK: - Swipe
-struct Swipe: Codable, Identifiable, Hashable  {
+struct Swipe: Codable, Identifiable, Hashable, Sendable  {
     let id: String
     let swiperId: String
     let swipeeId: String
@@ -63,7 +63,7 @@ struct Swipe: Codable, Identifiable, Hashable  {
 }
 
 // MARK: - Match
-struct Match: Codable, Identifiable, Hashable  {
+struct Match: Codable, Identifiable, Hashable, Sendable  {
     let id: String
     let user1Id: Int
     let user2Id: Int
@@ -81,7 +81,7 @@ struct Match: Codable, Identifiable, Hashable  {
     }
 }
 // MARK: - Review
-struct Review: Codable, Identifiable, Hashable  {
+struct Review: Codable, Identifiable, Hashable, Sendable  {
     let id: String
     let reviewerId: String
     let reviewedId: String

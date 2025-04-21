@@ -6,13 +6,13 @@ class HomeViewModel: ObservableObject {
     @Published var errorIcon: String = ""
     
     func fetchUsers() {
-        WebService.shared.fetchAllUsers { result in
+        SupabaseService.shared.fetchAllUsers { result in
             switch result {
             case .success(let users):
                 self.users = users
                 self.errorMessage = nil
             case .failure(let error):
-                error.logDetails() // Logs full detail in console
+                error.logDetails()
                 self.errorMessage = error.userMessage
                 self.errorIcon = error.iconName
             }
