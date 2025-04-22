@@ -6,7 +6,7 @@
 //
 import SwiftUI
 
-struct ProfileCard: View {
+struct UserCard: View {
     @State private var offset: CGSize = .zero
     @State private var isGone = false
     

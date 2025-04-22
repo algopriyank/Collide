@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ProfileCardDetail: View {
+struct UserCardDetail: View {
     @Environment(\.dismiss) var dismiss
     
     let user: UserModel
