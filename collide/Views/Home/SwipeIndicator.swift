@@ -9,7 +9,7 @@
 import SwiftUI
 import SwiftUI
 
-struct SwipeActionIndicatorView: View {
+struct SwipeIndicator: View {
     @Binding var xOffset: CGFloat
     
     var body: some View {

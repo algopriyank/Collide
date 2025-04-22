@@ -27,7 +27,7 @@ struct Home: View {
                     }
                 }
                 .navigationDestination(for: UserModel.self) { user in
-                    ProfileCardDetail(user: user)
+                    UserCardDetail(user: user)
                         .navigationTransition(.zoom(sourceID: user, in: transitionNamespace))
                 }
             }
@@ -37,7 +37,7 @@ struct Home: View {
 
 private extension Home {
     var backgroundGradient: some View {
-        LinearGradient(colors: [.clear, .blue.opacity(0.4), .green.opacity(0.4)],
+        LinearGradient(colors: [.clear, .indigo.opacity(0.2)],
                        startPoint: .topLeading,
                        endPoint: .bottomTrailing)
         .ignoresSafeArea()
@@ -117,7 +117,7 @@ private extension Home {
     var cardStack: some View {
         ZStack {
             ForEach(viewModel.users.prefix(5).reversed()) { user in
-                ProfileCard(user: user, onRemove: {
+                UserCard(user: user, onRemove: {
                     withAnimation {
                         viewModel.users.removeAll { $0.id == user.id }
                     }

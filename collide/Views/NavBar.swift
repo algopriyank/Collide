@@ -18,7 +18,7 @@ struct NavBar: View {
                     Label("Home", systemImage: "house")
                 }
             
-            ProfileCardDetail(user: UserModel.mock)
+            UserCardDetail(user: UserModel.mock)
                 .tabItem {
                     Label("Details", systemImage: "heart")
                 }
