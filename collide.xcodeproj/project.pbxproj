@@ -15,6 +15,8 @@
 		4C24289B2DB52AC500000AC2 /* Realtime in Frameworks */ = {isa = PBXBuildFile; productRef = 4C24289A2DB52AC500000AC2 /* Realtime */; };
 		4C24289D2DB52AC500000AC2 /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = 4C24289C2DB52AC500000AC2 /* Storage */; };
 		4C54344F2DAD0B3F00FAAEFB /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C54344E2DAD0B3F00FAAEFB /* AppError.swift */; };
+		4C7AAB542DC6B5F700B1A066 /* Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7AAB532DC6B5F700B1A066 /* Custom.swift */; };
+		4C7AAB562DC6CC3600B1A066 /* login2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7AAB552DC6CC3600B1A066 /* login2.swift */; };
 		4C98FDFE2DABE6DE00601764 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C98FDEA2DABE6DE00601764 /* Preview Assets.xcassets */; };
 		4C98FDFF2DABE6DE00601764 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C98FDFB2DABE6DE00601764 /* Assets.xcassets */; };
 		4C98FE002DABE6DE00601764 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98FDE62DABE6DE00601764 /* UserDataModel.swift */; };
@@ -30,6 +32,7 @@
 		4C98FE0C2DABE6DE00601764 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98FDF92DABE6DE00601764 /* Profile.swift */; };
 		4C98FE0D2DABE6DE00601764 /* collideApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98FDFC2DABE6DE00601764 /* collideApp.swift */; };
 		4CCAA4062DB52BFF001045C8 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 4CCAA4052DB52BFF001045C8 /* Supabase */; };
+		4CDA96A02DB8A4A000343803 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDA969F2DB8A4A000343803 /* Login.swift */; };
 		4CF09A382DAD1195001B0D38 /* UserCardDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF09A372DAD1195001B0D38 /* UserCardDetail.swift */; };
 		4CF09A3A2DAD1EF5001B0D38 /* CachedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF09A392DAD1EF5001B0D38 /* CachedImageView.swift */; };
 /* End PBXBuildFile section */
@@ -38,6 +41,8 @@
 		4C1FD73E2DAE765A008B254C /* UserCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCard.swift; sourceTree = "<group>"; };
 		4C2428962DB52A8F00000AC2 /* SupabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseManager.swift; sourceTree = "<group>"; };
 		4C54344E2DAD0B3F00FAAEFB /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		4C7AAB532DC6B5F700B1A066 /* Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Custom.swift; sourceTree = "<group>"; };
+		4C7AAB552DC6CC3600B1A066 /* login2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = login2.swift; sourceTree = "<group>"; };
 		4C98FDE62DABE6DE00601764 /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
 		4C98FDE82DABE6DE00601764 /* SupabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseService.swift; sourceTree = "<group>"; };
 		4C98FDEA2DABE6DE00601764 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -53,6 +58,7 @@
 		4C98FDFB2DABE6DE00601764 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C98FDFC2DABE6DE00601764 /* collideApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = collideApp.swift; sourceTree = "<group>"; };
 		4CCCB7342DA3CD4B009FCE1E /* collide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = collide.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CDA969F2DB8A4A000343803 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		4CF09A372DAD1195001B0D38 /* UserCardDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardDetail.swift; sourceTree = "<group>"; };
 		4CF09A392DAD1EF5001B0D38 /* CachedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,6 +107,9 @@
 		4C24288E2DB4B2B600000AC2 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				4CDA969F2DB8A4A000343803 /* Login.swift */,
+				4C7AAB532DC6B5F700B1A066 /* Custom.swift */,
+				4C7AAB552DC6CC3600B1A066 /* login2.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -288,6 +297,7 @@
 			files = (
 				4C98FE002DABE6DE00601764 /* UserDataModel.swift in Sources */,
 				4C98FE012DABE6DE00601764 /* SupabaseService.swift in Sources */,
+				4C7AAB562DC6CC3600B1A066 /* login2.swift in Sources */,
 				4C1FD73F2DAE765B008B254C /* UserCard.swift in Sources */,
 				4C54344F2DAD0B3F00FAAEFB /* AppError.swift in Sources */,
 				4C98FE022DABE6DE00601764 /* HomeViewModel.swift in Sources */,
@@ -301,6 +311,8 @@
 				4CF09A3A2DAD1EF5001B0D38 /* CachedImageView.swift in Sources */,
 				4C98FE0B2DABE6DE00601764 /* NavBar.swift in Sources */,
 				4C98FE0C2DABE6DE00601764 /* Profile.swift in Sources */,
+				4C7AAB542DC6B5F700B1A066 /* Custom.swift in Sources */,
+				4CDA96A02DB8A4A000343803 /* Login.swift in Sources */,
 				4C98FE0D2DABE6DE00601764 /* collideApp.swift in Sources */,
 				4CF09A382DAD1195001B0D38 /* UserCardDetail.swift in Sources */,
 			);
