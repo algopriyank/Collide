@@ -111,7 +111,8 @@ private extension Login {
     }
     
     var subtitleText: some View {
-        Text("Real connections, wild nights, good times.")
+        //Text("Real connections, wild nights, good times.")
+        Text("This app is basically Jim looking at Pam.")
             .font(.subheadline)
             .padding(.bottom)
     }

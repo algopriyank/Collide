@@ -29,7 +29,7 @@ extension View {
         self
             .sheet(isPresented: show) {
                 content()
-                    .background(.background)
+                    .background(.thinMaterial)
                     .clipShape(RoundedRectangle(cornerRadius: config.cornerRadius, style: .continuous))
                     .padding(.horizontal, config.horizontalPadding)
                     .padding(.bottom, config.bottomPadding)
@@ -54,6 +54,7 @@ enum CurrentView {
     case email
     case personalDetails
     case genders
+    case preferences
 }
 
 struct Action: Identifiable {
@@ -105,11 +106,55 @@ struct ContentView: View {
     let genderOptions = ["Male", "Female", "Non-binary", "Other", "Prefer not to say"]
     
     var body: some View {
-        VStack {
-            Button("Show Tray View") {
-                show.toggle()
+        ZStack {
+                // Background Gradient
+            LinearGradient(
+                colors: [.clear, .cyan.opacity(0.24), .green.opacity(0.24)],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .ignoresSafeArea()
+            
+            VStack(spacing: 20) {
+                    // Top Image inside RoundedRectangle
+                Image("loginBackground5")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(height: 300)
+                    .frame(maxWidth: .infinity)
+                    .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+                    .padding(.horizontal, 24)
+                
+                    // Text below image
+                Text("Welcome to Collide")
+                    .font(.largeTitle.bold())
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
+                    .padding(.top)
+                
+                Text("This app is basically Jim looking at Pam.")
+                    .font(.headline)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal)
+                
+                Spacer()
+                
+                    // Show tray button at the bottom
+                Button(action: {
+                    show.toggle()
+                }) {
+                    Text("Get Started")
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.white.opacity(0.2))
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                        .padding(.horizontal, 24)
+                }
+                .padding(.bottom, 40)
             }
-            .padding()
         }
         .systemTrayView($show) {
             VStack(spacing: 20) {
@@ -127,6 +172,8 @@ struct ContentView: View {
                         personalDetailsView()
                     case .genders:
                         genderView()
+                    case .preferences:
+                        preferencesView()
                     case .periods:
                         periodView()
                     case .keypad:
@@ -134,13 +181,10 @@ struct ContentView: View {
                     }
                 }
                 .compositingGroup()
-                
-                //continueButton()
             }
             .padding(20)
         }
-    }
-}
+    }}
 
     // MARK: - Subviews
 
@@ -264,18 +308,22 @@ extension ContentView {
                 }
             }
             
-            Button("Continue") {
+            Button(action: {
                 withAnimation(.bouncy) {
                     currentView = .otp
                 }
+            }) {
+                Text("Continue")
+                    .fontWeight(.semibold)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 15)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .clipShape(Capsule())
             }
             .disabled(phoneNumber.count < 10)
             .opacity(phoneNumber.count < 10 ? 0.5 : 1)
-            .fontWeight(.semibold)
-            .frame(maxWidth: .infinity)
-            .padding()
-            .background(Color.blue, in: Capsule())
-            .foregroundStyle(.white)
+            .contentShape(Rectangle())
             .padding(.top)
         }
     }
@@ -341,18 +389,22 @@ extension ContentView {
                 }
             }
             
-            Button("Verify") {
+            Button(action: {
                 withAnimation(.bouncy) {
-                    currentView = .periods
+                    currentView = .personalDetails
                 }
+            }) {
+                Text("Verify")
+                    .fontWeight(.semibold)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 15)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .clipShape(Capsule())
             }
             .disabled(otp.count < 6)
             .opacity(otp.count < 6 ? 0.5 : 1)
-            .fontWeight(.semibold)
-            .frame(maxWidth: .infinity)
-            .padding()
-            .background(Color.blue, in: Capsule())
-            .foregroundStyle(.white)
+            .contentShape(Rectangle())
             .padding(.top)
         }
     }
@@ -385,22 +437,26 @@ extension ContentView {
                 }
             }
             
-            Button(emailLoginStarted ? "Login" : "Continue") {
+            Button(action: {
                 withAnimation(.bouncy) {
                     if emailLoginStarted {
-                            // Normally you'd call login logic here
                         currentView = .personalDetails
                     } else {
                         emailLoginStarted = true
                     }
                 }
+            }) {
+                Text(emailLoginStarted ? "Login" : "Continue")
+                    .fontWeight(.semibold)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 15)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .clipShape(Capsule())
             }
             .disabled(email.isEmpty || (emailLoginStarted && password.isEmpty))
-            .fontWeight(.semibold)
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 15)
-            .background(Color.blue, in: Capsule())
-            .foregroundStyle(.white)
+            .opacity((email.isEmpty || (emailLoginStarted && password.isEmpty)) ? 0.5 : 1)
+            .contentShape(Rectangle())
             .padding(.top)
         }
     }
@@ -433,13 +489,15 @@ extension ContentView {
                     }
                 } label: {
                     HStack {
-                        Text(gender.isEmpty ? "Select Gender" : gender)
+                        Text(gender.isEmpty ? "Gender" : gender)
                             .foregroundColor(gender.isEmpty ? .gray : .primary)
                         Spacer()
                         Image(systemName: "chevron.right")
                             .foregroundColor(.gray)
                     }
                     .padding()
+                    .frame(height: 82) // Match the Picker height
+                    .frame(maxWidth: .infinity)
                     .background(Color.gray.opacity(0.1))
                     .clipShape(RoundedRectangle(cornerRadius: 12))
                 }
@@ -473,23 +531,28 @@ extension ContentView {
                 }
                 .pickerStyle(.wheel)
                 .frame(maxWidth: .infinity)
-                .frame(height: 120)
+                .frame(height: 82)
                 .clipped()
                 .background(Color.gray.opacity(0.1))
                 .clipShape(RoundedRectangle(cornerRadius: 12))
             }
             
-            Button("Continue") {
+            Button(action: {
                 withAnimation(.bouncy) {
-                    currentView = .periods
+                    currentView = .preferences
                 }
+            }) {
+                Text("Continue")
+                    .fontWeight(.semibold)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 15)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .clipShape(Capsule())
             }
             .disabled(name.isEmpty || gender.isEmpty)
-            .fontWeight(.semibold)
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 15)
-            .background(Color.blue, in: Capsule())
-            .foregroundStyle(.white)
+            .opacity((name.isEmpty || gender.isEmpty) ? 0.5 : 1)
+            .contentShape(Rectangle())
             .padding(.top)
         }
     }
@@ -529,6 +592,98 @@ extension ContentView {
                 }
             }
         }
+    }
+    
+    func preferencesView() -> some View {
+        VStack(spacing: 20) {
+            HStack {
+                Text("❤️ Preferences")
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                Spacer()
+                Button {
+                    withAnimation(.bouncy) {
+                        currentView = .personalDetails
+                    }
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.title)
+                        .foregroundStyle(Color.gray, Color.primary.opacity(0.1))
+                }
+            }
+            .padding(.bottom, 10)
+            
+            VStack(alignment: .leading, spacing: 10) {
+                Text("Interested In")
+                    .font(.headline)
+                
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 2), spacing: 12) {
+                    ForEach(["Men", "Women", "Everyone", "Custom"], id: \.self) { option in
+                        Text(option)
+                            .fontWeight(.medium)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(Color.gray.opacity(0.1))
+                            )
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                withAnimation(.snappy) {
+                                        // handle selection
+                                }
+                            }
+                    }
+                }
+                
+                Text("Looking For")
+                    .font(.headline)
+                    .padding(.top)
+                
+                VStack(spacing: 10) {
+                    ForEach([
+                        "Serious relationship",
+                        "Just vibing",
+                        "Casual hookups",
+                        "Friends only",
+                        "Party partner",
+                        "Exploring"
+                    ], id: \.self) { option in
+                        Text(option)
+                            .fontWeight(.medium)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(Color.gray.opacity(0.1))
+                            )
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                withAnimation(.snappy) {
+                                        // handle selection
+                                }
+                            }
+                    }
+                }
+            }
+            
+            Spacer()
+            
+            Button {
+                withAnimation(.bouncy) {
+                    currentView = .periods
+                }
+            } label: {
+                Text("Continue")
+                    .fontWeight(.semibold)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 15)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .clipShape(Capsule())
+            }
+        }
+        .padding(20)
     }
     
     func periodView() -> some View {
