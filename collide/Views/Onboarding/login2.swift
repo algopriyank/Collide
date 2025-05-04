@@ -101,6 +101,8 @@ struct ContentView: View {
     @State private var pronouns: String = ""
     @State private var showGenderPicker: Bool = false
     @State private var selectedPronoun: String = "he/him"
+    @State private var interestedIn: String = ""
+    @State private var lookingFor: String = ""
     
     let pronounOptions = ["he/him", "she/her", "they/them", "ze/zir", "prefer not to say"]
     let genderOptions = ["Male", "Female", "Non-binary", "Other", "Prefer not to say"]
@@ -622,15 +624,16 @@ extension ContentView {
                         Text(option)
                             .fontWeight(.medium)
                             .frame(maxWidth: .infinity)
-                            .padding()
+                            .frame(height: 50)
                             .background(
                                 RoundedRectangle(cornerRadius: 12)
-                                    .fill(Color.gray.opacity(0.1))
+                                    .fill(interestedIn == option ? Color.blue : Color.gray.opacity(0.1))
                             )
+                            .foregroundColor(interestedIn == option ? .white : .primary)
                             .contentShape(Rectangle())
                             .onTapGesture {
                                 withAnimation(.snappy) {
-                                        // handle selection
+                                    interestedIn = option
                                 }
                             }
                     }
@@ -640,7 +643,7 @@ extension ContentView {
                     .font(.headline)
                     .padding(.top)
                 
-                VStack(spacing: 10) {
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 2), spacing: 12) {
                     ForEach([
                         "Serious relationship",
                         "Just vibing",
@@ -652,22 +655,21 @@ extension ContentView {
                         Text(option)
                             .fontWeight(.medium)
                             .frame(maxWidth: .infinity)
-                            .padding()
+                            .frame(height: 50)
                             .background(
                                 RoundedRectangle(cornerRadius: 12)
-                                    .fill(Color.gray.opacity(0.1))
+                                    .fill(lookingFor == option ? Color.blue : Color.gray.opacity(0.1))
                             )
+                            .foregroundColor(lookingFor == option ? .white : .primary)
                             .contentShape(Rectangle())
                             .onTapGesture {
                                 withAnimation(.snappy) {
-                                        // handle selection
+                                    lookingFor = option
                                 }
                             }
                     }
                 }
             }
-            
-            Spacer()
             
             Button {
                 withAnimation(.bouncy) {
@@ -682,6 +684,7 @@ extension ContentView {
                     .foregroundColor(.white)
                     .clipShape(Capsule())
             }
+            .padding(.top)
         }
         .padding(20)
     }
