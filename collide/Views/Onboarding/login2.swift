@@ -55,6 +55,7 @@ enum CurrentView {
     case personalDetails
     case genders
     case preferences
+    case college
 }
 
 struct Action: Identifiable {
@@ -103,6 +104,9 @@ struct ContentView: View {
     @State private var selectedPronoun: String = "he/him"
     @State private var interestedIn: String = ""
     @State private var lookingFor: String = ""
+    @State private var collegeName: String = ""
+    @State private var registrationNumber: String = ""
+    @State private var location: String = ""
     
     let pronounOptions = ["he/him", "she/her", "they/them", "ze/zir", "prefer not to say"]
     let genderOptions = ["Male", "Female", "Non-binary", "Other", "Prefer not to say"]
@@ -176,6 +180,8 @@ struct ContentView: View {
                         genderView()
                     case .preferences:
                         preferencesView()
+                    case .college:
+                        collegeView()
                     case .periods:
                         periodView()
                     case .keypad:
@@ -673,7 +679,64 @@ extension ContentView {
             
             Button {
                 withAnimation(.bouncy) {
-                    currentView = .periods
+                    currentView = .college
+                }
+            } label: {
+                Text("Continue")
+                    .fontWeight(.semibold)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 15)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .clipShape(Capsule())
+            }
+            .padding(.top)
+        }
+        .padding(20)
+    }
+    
+    func collegeView() -> some View {
+        VStack(spacing: 20) {
+            HStack {
+                Text("🎓 College Details")
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                Spacer()
+                Button {
+                    withAnimation(.bouncy) {
+                        currentView = .preferences
+                    }
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.title)
+                        .foregroundStyle(Color.gray, Color.primary.opacity(0.1))
+                }
+            }
+            .padding(.bottom, 10)
+            
+            VStack(spacing: 16) {
+                TextField("Enter college name", text: $collegeName)
+                    .textContentType(.organizationName)
+                    .padding()
+                    .background(Color.gray.opacity(0.1))
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                
+                TextField("Registration number", text: $registrationNumber)
+                    .keyboardType(.asciiCapable)
+                    .padding()
+                    .background(Color.gray.opacity(0.1))
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                
+                TextField("Location", text: $location)
+                    .textContentType(.addressCity)
+                    .padding()
+                    .background(Color.gray.opacity(0.1))
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+            }
+            
+            Button {
+                withAnimation(.bouncy) {
+                    currentView = .periods // Replace with the next screen when ready
                 }
             } label: {
                 Text("Continue")
