@@ -58,6 +58,7 @@ enum CurrentView {
     case college
     case photos
     case bioTags
+    case interests
 }
 
 struct Action: Identifiable {
@@ -153,6 +154,7 @@ struct ContentView: View {
     @State private var tempImage: UIImage? = nil
     @State private var bio: String = ""
     @State private var selectedTags: Set<String> = []
+    @State private var selectedInterests: Set<String> = []
     
     let pronounOptions = ["he/him", "she/her", "they/them", "ze/zir", "prefer not to say"]
     let genderOptions = ["Male", "Female", "Non-binary", "Other", "Prefer not to say"]
@@ -232,6 +234,8 @@ struct ContentView: View {
                         photosView()
                     case .bioTags:
                         bioTagsView()
+                    case .interests:
+                        interestsView()
                     case .periods:
                         periodView()
                     case .keypad:
@@ -970,7 +974,7 @@ extension ContentView {
             
             Button {
                 withAnimation(.bouncy) {
-                    currentView = .periods // Or the next screen
+                    currentView = .interests // Or the next screen
                 }
             } label: {
                 Text("Continue")
@@ -983,6 +987,79 @@ extension ContentView {
             }
             .padding(.top)
         }
+    }
+    
+    func interestsView() -> some View {
+        let interests = [
+            "Hip-hop", "Indie", "EDM", "Netflix", "Anime", "K-Dramas",
+            "Coding", "Painting", "Reading", "Gym", "Hiking", "Tech fests",
+            "Chill", "House parties", "Ragers"
+        ]
+        
+        let rows = [
+            GridItem(.fixed(40)),
+            GridItem(.fixed(40)),
+            GridItem(.fixed(40))
+        ]
+        
+        return VStack(alignment: .leading, spacing: 20) {
+            header(title: "What are you into?") {
+                withAnimation(.bouncy) {
+                    currentView = .bioTags
+                }
+            }
+            
+            VStack(alignment: .leading, spacing: 12) {
+                Text("Pick 5+ interests")
+                    .font(.headline)
+                    .padding(.horizontal)
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHGrid(rows: rows, spacing: 12) {
+                        ForEach(interests, id: \.self) { interest in
+                            Button {
+                                if selectedInterests.contains(interest) {
+                                    selectedInterests.remove(interest)
+                                } else {
+                                    selectedInterests.insert(interest)
+                                }
+                            } label: {
+                                Text(interest)
+                                    .font(.subheadline)
+                                    .padding(.horizontal, 14)
+                                    .padding(.vertical, 8)
+                                    .background(Color.gray.opacity(0.1))
+                                    .foregroundColor(.primary)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 30)
+                                            .stroke(selectedInterests.contains(interest) ? Color.blue : Color.clear, lineWidth: 2)
+                                    )
+                                    .clipShape(Capsule())
+                            }
+                        }
+                    }
+                    .padding(.horizontal)
+                }
+                .frame(height: 140) // 👈 Fixed height to prevent extra spacing
+            }
+            
+            Button {
+                withAnimation(.bouncy) {
+                    currentView = .periods // Replace with your next step
+                }
+            } label: {
+                Text("Continue")
+                    .fontWeight(.semibold)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 15)
+                    .background(selectedInterests.count >= 5 ? Color.blue : Color.gray)
+                    .foregroundColor(.white)
+                    .clipShape(Capsule())
+            }
+            .disabled(selectedInterests.count < 5)
+            .padding(.top)
+        }
+        .padding(.bottom) // optional if your global padding needs it
     }
     
     func periodView() -> some View {
