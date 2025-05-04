@@ -57,6 +57,7 @@ enum CurrentView {
     case preferences
     case college
     case photos
+    case bioTags
 }
 
 struct Action: Identifiable {
@@ -150,6 +151,8 @@ struct ContentView: View {
     @State private var showingImagePicker = false
     @State private var selectedImageIndex: Int? = nil
     @State private var tempImage: UIImage? = nil
+    @State private var bio: String = ""
+    @State private var selectedTags: Set<String> = []
     
     let pronounOptions = ["he/him", "she/her", "they/them", "ze/zir", "prefer not to say"]
     let genderOptions = ["Male", "Female", "Non-binary", "Other", "Prefer not to say"]
@@ -227,6 +230,8 @@ struct ContentView: View {
                         collegeView()
                     case .photos:
                         photosView()
+                    case .bioTags:
+                        bioTagsView()
                     case .periods:
                         periodView()
                     case .keypad:
@@ -876,7 +881,7 @@ extension ContentView {
             
             Button {
                 withAnimation(.bouncy) {
-                    currentView = .periods
+                    currentView = .bioTags
                 }
             } label: {
                 Text("Continue")
@@ -897,6 +902,86 @@ extension ContentView {
             }
         }) {
             ImagePicker(image: $tempImage)
+        }
+    }
+    
+    func bioTagsView() -> some View {
+        let allTags = [
+            "AI", "code", "football", "tv", "games", "music",
+            "PSP", "cricket", "driving", "Meme Dealer", "Bookworm",
+            "Fitness Freak", "Party Animal", "Traveller", "Reader"
+        ]
+        
+        let rows = [GridItem(.fixed(36)), GridItem(.fixed(36)), GridItem(.fixed(36))]
+        
+        return VStack(spacing: 20) {
+            header(title: "📝 Bio & Tags") {
+                withAnimation(.bouncy) {
+                    currentView = .photos
+                }
+            }
+            
+            VStack(alignment: .leading, spacing: 12) {
+                Text("Write a little something about you")
+                    .font(.headline)
+                
+                Text("Example: “Love chai, memes & road trips.”")
+                    .foregroundColor(.gray)
+                    .font(.subheadline)
+                
+                TextField("Type your bio here...", text: $bio, axis: .vertical)
+                    .lineLimit(3...4)
+                    .padding()
+                    .background(Color.gray.opacity(0.1))
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+            }
+            
+            VStack(alignment: .leading, spacing: 12) {
+                Text("Choose your tags")
+                    .font(.headline)
+                
+                ScrollView(.horizontal) {
+                    LazyHGrid(rows: rows, spacing: 10) {
+                        ForEach(allTags, id: \.self) { tag in
+                            Button {
+                                if selectedTags.contains(tag) {
+                                    selectedTags.remove(tag)
+                                } else {
+                                    selectedTags.insert(tag)
+                                }
+                            } label: {
+                                Text(tag)
+                                    .font(.subheadline)
+                                    .padding(.horizontal, 14)
+                                    .padding(.vertical, 8)
+                                    .background(Color.gray.opacity(0.1))
+                                    .foregroundColor(.primary)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 30)
+                                            .stroke(selectedTags.contains(tag) ? Color.blue : Color.clear, lineWidth: 2)
+                                    )
+                                    .clipShape(Capsule())
+                            }
+                        }
+                    }
+                    .padding(.vertical, 8)
+                }
+            }
+            
+            Button {
+                withAnimation(.bouncy) {
+                    currentView = .periods // Or the next screen
+                }
+            } label: {
+                Text("Continue")
+                    .fontWeight(.semibold)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 15)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .clipShape(Capsule())
+            }
+            .padding(.top)
         }
     }
     
