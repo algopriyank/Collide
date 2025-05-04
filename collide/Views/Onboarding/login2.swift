@@ -56,6 +56,7 @@ enum CurrentView {
     case genders
     case preferences
     case college
+    case photos
 }
 
 struct Action: Identifiable {
@@ -83,6 +84,44 @@ let keypadValues: [KeyValue] = {
     return values
 }()
 
+struct ImagePicker: UIViewControllerRepresentable {
+    @Environment(\.presentationMode) var presentationMode
+    var sourceType: UIImagePickerController.SourceType = .photoLibrary
+    @Binding var image: UIImage?
+    
+    func makeUIViewController(context: Context) -> UIImagePickerController {
+        let picker = UIImagePickerController()
+        picker.sourceType = sourceType
+        picker.delegate = context.coordinator
+        return picker
+    }
+    
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+    
+    class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+        let parent: ImagePicker
+        
+        init(_ parent: ImagePicker) {
+            self.parent = parent
+        }
+        
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            if let image = info[.originalImage] as? UIImage {
+                parent.image = image
+            }
+            parent.presentationMode.wrappedValue.dismiss()
+        }
+        
+        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+            parent.presentationMode.wrappedValue.dismiss()
+        }
+    }
+}
+
     // MARK: - Main View
 
 struct ContentView: View {
@@ -107,6 +146,10 @@ struct ContentView: View {
     @State private var collegeName: String = ""
     @State private var registrationNumber: String = ""
     @State private var location: String = ""
+    @State private var selectedImages: [UIImage?] = Array(repeating: nil, count: 6)
+    @State private var showingImagePicker = false
+    @State private var selectedImageIndex: Int? = nil
+    @State private var tempImage: UIImage? = nil
     
     let pronounOptions = ["he/him", "she/her", "they/them", "ze/zir", "prefer not to say"]
     let genderOptions = ["Male", "Female", "Non-binary", "Other", "Prefer not to say"]
@@ -182,6 +225,8 @@ struct ContentView: View {
                         preferencesView()
                     case .college:
                         collegeView()
+                    case .photos:
+                        photosView()
                     case .periods:
                         periodView()
                     case .keypad:
@@ -736,7 +781,7 @@ extension ContentView {
             
             Button {
                 withAnimation(.bouncy) {
-                    currentView = .periods // Replace with the next screen when ready
+                    currentView = .photos // Replace with the next screen when ready
                 }
             } label: {
                 Text("Continue")
@@ -750,6 +795,109 @@ extension ContentView {
             .padding(.top)
         }
         .padding(20)
+    }
+    
+    func photosView() -> some View {
+        let boxSize: CGFloat = 100
+        let spacing: CGFloat = 10
+        
+        let columns = Array(repeating: GridItem(.fixed(boxSize), spacing: spacing), count: 3)
+        
+        return VStack(spacing: 20) {
+            HStack {
+                Text("📸 Upload Photos")
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                Spacer()
+                Button {
+                    withAnimation(.bouncy) {
+                        currentView = .college
+                    }
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.title)
+                        .foregroundStyle(Color.gray, Color.primary.opacity(0.1))
+                }
+            }
+            .padding(.bottom, 10)
+            
+            LazyVGrid(columns: columns, spacing: spacing) {
+                ForEach(0..<6, id: \.self) { index in
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color.gray.opacity(0.1))
+                            .frame(width: boxSize, height: boxSize)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(selectedImages[index] != nil ? Color.blue : Color.gray.opacity(0.3), lineWidth: 2)
+                            )
+                        
+                        if let image = selectedImages[index] {
+                            Image(uiImage: image)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: boxSize, height: boxSize)
+                                .clipped()
+                                .cornerRadius(12)
+                        } else {
+                            Image(systemName: "plus")
+                                .font(.title)
+                                .foregroundColor(.gray)
+                        }
+                        
+                        if selectedImages[index] != nil {
+                            VStack {
+                                HStack {
+                                    Spacer()
+                                    Button {
+                                        selectedImages[index] = nil
+                                    } label: {
+                                        Image(systemName: "xmark.circle.fill")
+                                            .foregroundColor(.white)
+                                            .padding(5)
+                                            .background(Color.black.opacity(0.6))
+                                            .clipShape(Circle())
+                                    }
+                                }
+                                Spacer()
+                            }
+                            .frame(width: boxSize, height: boxSize)
+                            .padding(6)
+                        }
+                    }
+                    .onTapGesture {
+                        if selectedImages[index] == nil {
+                            selectedImageIndex = index
+                            showingImagePicker = true
+                        }
+                    }
+                }
+            }
+            
+            Button {
+                withAnimation(.bouncy) {
+                    currentView = .periods
+                }
+            } label: {
+                Text("Continue")
+                    .fontWeight(.semibold)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 15)
+                    .background(selectedImages.contains(where: { $0 != nil }) ? Color.blue : Color.gray)
+                    .foregroundColor(.white)
+                    .clipShape(Capsule())
+            }
+            .disabled(!selectedImages.contains(where: { $0 != nil }))
+        }
+        .padding(.horizontal, 20)
+        .sheet(isPresented: $showingImagePicker, onDismiss: {
+            if let temp = tempImage, let index = selectedImageIndex {
+                selectedImages[index] = temp
+                tempImage = nil
+            }
+        }) {
+            ImagePicker(image: $tempImage)
+        }
     }
     
     func periodView() -> some View {
