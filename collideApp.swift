@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct collideApp: App {
+    @StateObject private var authViewModel = AuthViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if authViewModel.onboardingComplete {
+                NavBar()
+            } else {
+                OnboardingView(viewModel: authViewModel)
+            }
         }
     }
 }
