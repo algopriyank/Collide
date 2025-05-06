@@ -23,7 +23,7 @@
 		4C53A7152DC9CCDB001AB288 /* PhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C53A70A2DC9CCDB001AB288 /* PhotosView.swift */; };
 		4C53A7162DC9CCDB001AB288 /* FunQuestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C53A7032DC9CCDB001AB288 /* FunQuestionsView.swift */; };
 		4C53A7172DC9CCDB001AB288 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C53A70B2DC9CCDB001AB288 /* PreferencesView.swift */; };
-		4C53A7182DC9CCDB001AB288 /* BioTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C53A6FF2DC9CCDB001AB288 /* BioTagsView.swift */; };
+		4C53A7182DC9CCDB001AB288 /* BioInterestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C53A6FF2DC9CCDB001AB288 /* BioInterestsView.swift */; };
 		4C53A7192DC9CCDB001AB288 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C53A6F72DC9CCDB001AB288 /* OnboardingView.swift */; };
 		4C53A71A2DC9CCDB001AB288 /* TrayContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C53A70D2DC9CCDB001AB288 /* TrayContentView.swift */; };
 		4C53A71B2DC9CCDB001AB288 /* CollegeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C53A7002DC9CCDB001AB288 /* CollegeView.swift */; };
@@ -32,7 +32,6 @@
 		4C53A71E2DC9CCDB001AB288 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C53A6F82DC9CCDB001AB288 /* ImagePicker.swift */; };
 		4C53A71F2DC9CCDB001AB288 /* GenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C53A7042DC9CCDB001AB288 /* GenderView.swift */; };
 		4C53A7202DC9CCDB001AB288 /* PersonalDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C53A7082DC9CCDB001AB288 /* PersonalDetailsView.swift */; };
-		4C53A7212DC9CCDB001AB288 /* InterestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C53A7052DC9CCDB001AB288 /* InterestsView.swift */; };
 		4C53A7222DC9CCDB001AB288 /* OTPInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C53A7072DC9CCDB001AB288 /* OTPInputView.swift */; };
 		4C54344F2DAD0B3F00FAAEFB /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C54344E2DAD0B3F00FAAEFB /* AppError.swift */; };
 		4C98FDFE2DABE6DE00601764 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C98FDEA2DABE6DE00601764 /* Preview Assets.xcassets */; };
@@ -63,13 +62,12 @@
 		4C53A6FA2DC9CCDB001AB288 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		4C53A6FC2DC9CCDB001AB288 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		4C53A6FD2DC9CCDB001AB288 /* TrayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrayView.swift; sourceTree = "<group>"; };
-		4C53A6FF2DC9CCDB001AB288 /* BioTagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioTagsView.swift; sourceTree = "<group>"; };
+		4C53A6FF2DC9CCDB001AB288 /* BioInterestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioInterestsView.swift; sourceTree = "<group>"; };
 		4C53A7002DC9CCDB001AB288 /* CollegeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeView.swift; sourceTree = "<group>"; };
 		4C53A7012DC9CCDB001AB288 /* EmailLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginView.swift; sourceTree = "<group>"; };
 		4C53A7022DC9CCDB001AB288 /* FinalScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalScreenView.swift; sourceTree = "<group>"; };
 		4C53A7032DC9CCDB001AB288 /* FunQuestionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunQuestionsView.swift; sourceTree = "<group>"; };
 		4C53A7042DC9CCDB001AB288 /* GenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderView.swift; sourceTree = "<group>"; };
-		4C53A7052DC9CCDB001AB288 /* InterestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsView.swift; sourceTree = "<group>"; };
 		4C53A7062DC9CCDB001AB288 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		4C53A7072DC9CCDB001AB288 /* OTPInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPInputView.swift; sourceTree = "<group>"; };
 		4C53A7082DC9CCDB001AB288 /* PersonalDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDetailsView.swift; sourceTree = "<group>"; };
@@ -156,8 +154,7 @@
 				4C53A70B2DC9CCDB001AB288 /* PreferencesView.swift */,
 				4C53A70A2DC9CCDB001AB288 /* PhotosView.swift */,
 				4C53A7002DC9CCDB001AB288 /* CollegeView.swift */,
-				4C53A6FF2DC9CCDB001AB288 /* BioTagsView.swift */,
-				4C53A7052DC9CCDB001AB288 /* InterestsView.swift */,
+				4C53A6FF2DC9CCDB001AB288 /* BioInterestsView.swift */,
 				4C53A7032DC9CCDB001AB288 /* FunQuestionsView.swift */,
 				4C53A7022DC9CCDB001AB288 /* FinalScreenView.swift */,
 			);
@@ -387,7 +384,7 @@
 				4C53A7152DC9CCDB001AB288 /* PhotosView.swift in Sources */,
 				4C53A7162DC9CCDB001AB288 /* FunQuestionsView.swift in Sources */,
 				4C53A7172DC9CCDB001AB288 /* PreferencesView.swift in Sources */,
-				4C53A7182DC9CCDB001AB288 /* BioTagsView.swift in Sources */,
+				4C53A7182DC9CCDB001AB288 /* BioInterestsView.swift in Sources */,
 				4C53A7192DC9CCDB001AB288 /* OnboardingView.swift in Sources */,
 				4C53A71A2DC9CCDB001AB288 /* TrayContentView.swift in Sources */,
 				4C53A71B2DC9CCDB001AB288 /* CollegeView.swift in Sources */,
@@ -396,7 +393,6 @@
 				4C53A71E2DC9CCDB001AB288 /* ImagePicker.swift in Sources */,
 				4C53A71F2DC9CCDB001AB288 /* GenderView.swift in Sources */,
 				4C53A7202DC9CCDB001AB288 /* PersonalDetailsView.swift in Sources */,
-				4C53A7212DC9CCDB001AB288 /* InterestsView.swift in Sources */,
 				4C53A7222DC9CCDB001AB288 /* OTPInputView.swift in Sources */,
 				4C98FE002DABE6DE00601764 /* UserDataModel.swift in Sources */,
 				4C98FE012DABE6DE00601764 /* SupabaseService.swift in Sources */,

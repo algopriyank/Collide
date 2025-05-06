@@ -15,8 +15,7 @@ enum CurrentView {
     case preferences
     case college
     case photos
-    case bioTags
-    case interests
+    case BioInterests
     case funQuestions
     case finalScreen
 }

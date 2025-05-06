@@ -23,7 +23,7 @@ struct FunQuestionsView: View {
                 // MARK: - Header
             HeaderView(title: "Fun Questions") {
                 withAnimation(.bouncy) {
-                    viewModel.currentView = .interests
+                    viewModel.currentView = .BioInterests
                 }
             }
             

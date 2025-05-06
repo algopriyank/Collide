@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct InterestsView: View {
+struct BioInterestsView: View {
     @ObservedObject var viewModel: AuthViewModel
     
     let interests = [
@@ -16,13 +16,33 @@ struct InterestsView: View {
             GridItem(.fixed(40))
         ]
         
-        return VStack(alignment: .leading, spacing: 20) {
-            HeaderView(title: "What are you into?") {
+        VStack(alignment: .leading, spacing: 20) {
+            HeaderView(title: "📝 Your Bio & Interests") {
                 withAnimation(.bouncy) {
-                    viewModel.currentView = .bioTags
+                    viewModel.currentView = .photos
                 }
             }
             
+                // Bio Input
+            VStack(alignment: .leading, spacing: 12) {
+                Text("Write a little something about you")
+                    .font(.headline)
+                    .padding(.horizontal)
+                
+                Text("Love chai, memes & road trips.")
+                    .foregroundColor(.gray)
+                    .font(.subheadline)
+                    .padding(.horizontal)
+                
+                TextField("Type your bio here...", text: $viewModel.bio, axis: .vertical)
+                    .lineLimit(3...4)
+                    .padding()
+                    .background(Color.gray.opacity(0.1))
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .padding(.horizontal)
+            }
+            
+                // Interest Picker
             VStack(alignment: .leading, spacing: 12) {
                 Text("Pick 5+ interests")
                     .font(.headline)
@@ -53,6 +73,7 @@ struct InterestsView: View {
                 .frame(height: 140)
             }
             
+                // Continue Button
             Button {
                 withAnimation(.bouncy) {
                     viewModel.currentView = .funQuestions
@@ -62,12 +83,13 @@ struct InterestsView: View {
                     .fontWeight(.semibold)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 15)
-                    .background(viewModel.isContinueEnabled(for: .interests) ? Color.blue : Color.gray)
+                    .background(viewModel.isContinueEnabled(for: .funQuestions) ? Color.blue : Color.gray)
                     .foregroundColor(.white)
                     .clipShape(Capsule())
             }
-            .disabled(!viewModel.isContinueEnabled(for: .interests))
+            .disabled(!viewModel.isContinueEnabled(for: .funQuestions))
+            .padding(.horizontal)
             .padding(.top)
         }
     }
-} 
+}

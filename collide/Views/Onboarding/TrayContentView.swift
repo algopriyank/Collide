@@ -27,10 +27,8 @@ struct TrayContentView: View {
                     CollegeView(viewModel: viewModel)
                 case .photos:
                     PhotosView(viewModel: viewModel)
-                case .bioTags:
-                    BioTagsView(viewModel: viewModel)
-                case .interests:
-                    InterestsView(viewModel: viewModel)
+                case .BioInterests:
+                    BioInterestsView(viewModel: viewModel)
                 case .funQuestions:
                 FunQuestionsView(viewModel: viewModel)
                 case .finalScreen:

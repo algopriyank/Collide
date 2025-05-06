@@ -28,6 +28,7 @@ class AuthViewModel: ObservableObject {
     @Published var bio: String = ""
     @Published var selectedTags: Set<String> = []
     @Published var selectedInterests: Set<String> = []
+    @Published var allInterests: [Interest] = []
     @Published var funQuestionAnswers: [String: String] = [:]
     @Published var onboardingComplete: Bool {
         didSet {
@@ -147,7 +148,7 @@ class AuthViewModel: ObservableObject {
             return !name.isEmpty && !gender.isEmpty
         case .photos:
             return selectedImages.contains(where: { $0 != nil })
-        case .interests:
+        case .BioInterests:
             return selectedInterests.count >= 5
         default:
             return true

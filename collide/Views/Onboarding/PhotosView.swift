@@ -81,7 +81,7 @@ struct PhotosView: View {
             
             Button {
                 withAnimation(.bouncy) {
-                    viewModel.currentView = .bioTags
+                    viewModel.currentView = .BioInterests
                 }
             } label: {
                 Text("Continue")
