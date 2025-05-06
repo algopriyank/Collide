@@ -34,11 +34,13 @@ struct EmailLoginView: View {
             }
             
             Button(action: {
-                withAnimation(.bouncy) {
+                Task {
                     if viewModel.emailLoginStarted {
-                        viewModel.currentView = .personalDetails
+                        await viewModel.signInWithEmail()
                     } else {
-                        viewModel.emailLoginStarted = true
+                        withAnimation(.bouncy) {
+                            viewModel.emailLoginStarted = true
+                        }
                     }
                 }
             }) {
@@ -52,8 +54,15 @@ struct EmailLoginView: View {
             }
             .disabled(!viewModel.isContinueEnabled(for: .email))
             .opacity(viewModel.isContinueEnabled(for: .email) ? 1 : 0.5)
-            .contentShape(Rectangle())
             .padding(.top)
+            
+            if let errorMessage = viewModel.errorMessage {
+                Text("⚠️ \(errorMessage)")
+                    .foregroundColor(.red)
+                    .font(.caption)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal)
+            }
         }
     }
 } 

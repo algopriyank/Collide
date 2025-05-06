@@ -1,6 +1,7 @@
 import SwiftUI
 
 class AuthViewModel: ObservableObject {
+    @Published var errorMessage: String? = nil
     @Published var currentView: CurrentView = .login
     @Published var phoneNumber: String = ""
     @Published var otp: String = ""
@@ -131,3 +132,31 @@ class AuthViewModel: ObservableObject {
         }
     }
 } 
+
+import Supabase
+
+extension AuthViewModel {
+    @MainActor
+    func signInWithEmail() async {
+        do {
+            try await SupabaseManager.shared.client.auth.signIn(email: email, password: password)
+            currentView = .personalDetails  // ✅ Go to personalDetails on success
+            errorMessage = nil
+        } catch {
+            print("Sign-in error: \(error.localizedDescription)")
+            errorMessage = error.localizedDescription  // ❌ Show error
+        }
+    }
+    
+    @MainActor
+    func signUpWithEmail() async {
+        do {
+            try await SupabaseManager.shared.client.auth.signUp(email: email, password: password)
+            currentView = .personalDetails  // ✅ Go to personalDetails on success
+            errorMessage = nil
+        } catch {
+            print("Sign-up error: \(error.localizedDescription)")
+            errorMessage = error.localizedDescription  // ❌ Show error
+        }
+    }
+}
