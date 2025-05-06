@@ -8,10 +8,19 @@
 import SwiftUI
 
 struct Messages: View {
+    @StateObject private var authViewModel = AuthViewModel()
+    
     var body: some View {
-        Text("💬 Messages Screen")
-            .font(.largeTitle)
-            .padding()
+        VStack {
+            Text("💬 Messages Screen")
+                .font(.largeTitle)
+                .padding()
+            
+            Button("Reset Onboarding") {
+                UserDefaults.standard.set(false, forKey: "onboardingComplete")
+                authViewModel.onboardingComplete = false
+            }
+        }
     }
 }
 
