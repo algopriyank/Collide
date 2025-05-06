@@ -7,7 +7,7 @@ struct PhoneInputView: View {
         VStack(spacing: 20) {
             HeaderView(title: "Enter Phone Number") {
                 withAnimation(.bouncy) {
-                    viewModel.currentView = .actions
+                    viewModel.currentView = .login
                 }
             }
             

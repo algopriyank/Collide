@@ -1,10 +1,7 @@
 import SwiftUI
 
 class AuthViewModel: ObservableObject {
-    @Published var currentView: CurrentView = .actions
-    @Published var selectedAction: Action? = nil
-    @Published var selectedPeriod: Period? = nil
-    @Published var duration: String = ""
+    @Published var currentView: CurrentView = .login
     @Published var phoneNumber: String = ""
     @Published var otp: String = ""
     @Published var emailLoginStarted = false
@@ -26,7 +23,6 @@ class AuthViewModel: ObservableObject {
     @Published var selectedImageIndex: Int? = nil
     @Published var tempImage: UIImage? = nil
     @Published var bio: String = ""
-    @Published var selectedTags: Set<String> = []
     @Published var selectedInterests: Set<String> = []
     @Published var allInterests: [Interest] = []
     @Published var funQuestionAnswers: [String: String] = [:]
@@ -74,26 +70,6 @@ class AuthViewModel: ObservableObject {
             if otp.count < 6 {
                 otp.append(value.title)
             }
-        }
-    }
-    
-    // Function to process keypad input for duration
-    func processDurationKeypad(value: KeyValue) {
-        if value.isBack {
-            if !duration.isEmpty {
-                duration.removeLast()
-            }
-        } else {
-            duration.append(value.title)
-        }
-    }
-    
-    // Function to toggle tag selection
-    func toggleTag(_ tag: String) {
-        if selectedTags.contains(tag) {
-            selectedTags.remove(tag)
-        } else {
-            selectedTags.insert(tag)
         }
     }
     

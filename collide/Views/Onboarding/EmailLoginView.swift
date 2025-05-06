@@ -9,7 +9,7 @@ struct EmailLoginView: View {
         VStack(spacing: 20) {
             HeaderView(title: "Enter Email") {
                 withAnimation(.bouncy) {
-                    viewModel.currentView = .actions
+                    viewModel.currentView = .login
                     viewModel.resetEmailLogin()
                 }
             }
