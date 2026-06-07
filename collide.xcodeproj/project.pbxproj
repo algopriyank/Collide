@@ -51,6 +51,10 @@
 		4CCAA4062DB52BFF001045C8 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 4CCAA4052DB52BFF001045C8 /* Supabase */; };
 		4CF09A382DAD1195001B0D38 /* UserCardDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF09A372DAD1195001B0D38 /* UserCardDetail.swift */; };
 		4CF09A3A2DAD1EF5001B0D38 /* CachedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF09A392DAD1EF5001B0D38 /* CachedImageView.swift */; };
+		993A700D2FD57D8E00CCEB3B /* New-Kansas-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 993A700C2FD57D8E00CCEB3B /* New-Kansas-Regular.otf */; };
+		993A70262FD59C9D00CCEB3B /* LoopingVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993A70252FD59C9000CCEB3B /* LoopingVideoView.swift */; };
+		993A70282FD5A23800CCEB3B /* romcom_loop.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 993A70272FD5A23800CCEB3B /* romcom_loop.mp4 */; };
+		993A702A2FD5A4F800CCEB3B /* New-Kansas-ExtraSwash-Light-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 993A70292FD5A4F800CCEB3B /* New-Kansas-ExtraSwash-Light-Italic.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +97,11 @@
 		4CCCB7342DA3CD4B009FCE1E /* collide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = collide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CF09A372DAD1195001B0D38 /* UserCardDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardDetail.swift; sourceTree = "<group>"; };
 		4CF09A392DAD1EF5001B0D38 /* CachedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageView.swift; sourceTree = "<group>"; };
+		993A70092FD4E51100CCEB3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		993A700C2FD57D8E00CCEB3B /* New-Kansas-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "New-Kansas-Regular.otf"; sourceTree = "<group>"; };
+		993A70252FD59C9000CCEB3B /* LoopingVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopingVideoView.swift; sourceTree = "<group>"; };
+		993A70272FD5A23800CCEB3B /* romcom_loop.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = romcom_loop.mp4; sourceTree = "<group>"; };
+		993A70292FD5A4F800CCEB3B /* New-Kansas-ExtraSwash-Light-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "New-Kansas-ExtraSwash-Light-Italic.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +181,7 @@
 		4C53A6F92DC9CCDB001AB288 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				993A70252FD59C9000CCEB3B /* LoopingVideoView.swift */,
 				4C53A6F82DC9CCDB001AB288 /* ImagePicker.swift */,
 			);
 			path = Utilities;
@@ -267,6 +277,8 @@
 		4C98FDFD2DABE6DE00601764 /* collide */ = {
 			isa = PBXGroup;
 			children = (
+				993A70272FD5A23800CCEB3B /* romcom_loop.mp4 */,
+				993A70092FD4E51100CCEB3B /* Info.plist */,
 				4C98FDFA2DABE6DE00601764 /* Views */,
 				4C98FDE72DABE6DE00601764 /* data */,
 				4C98FDED2DABE6DE00601764 /* View Models */,
@@ -282,6 +294,8 @@
 				4C98FDFD2DABE6DE00601764 /* collide */,
 				4C98FDFC2DABE6DE00601764 /* collideApp.swift */,
 				4CCCB7352DA3CD4B009FCE1E /* Products */,
+				993A700C2FD57D8E00CCEB3B /* New-Kansas-Regular.otf */,
+				993A70292FD5A4F800CCEB3B /* New-Kansas-ExtraSwash-Light-Italic.otf */,
 			);
 			sourceTree = "<group>";
 		};
@@ -329,7 +343,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1620;
-				LastUpgradeCheck = 1630;
+				LastUpgradeCheck = 2650;
 				TargetAttributes = {
 					4CCCB7332DA3CD4B009FCE1E = {
 						CreatedOnToolsVersion = 16.2;
@@ -363,7 +377,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				993A702A2FD5A4F800CCEB3B /* New-Kansas-ExtraSwash-Light-Italic.otf in Resources */,
+				993A70282FD5A23800CCEB3B /* romcom_loop.mp4 in Resources */,
 				4C98FDFE2DABE6DE00601764 /* Preview Assets.xcassets in Resources */,
+				993A700D2FD57D8E00CCEB3B /* New-Kansas-Regular.otf in Resources */,
 				4C98FDFF2DABE6DE00601764 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -409,6 +426,7 @@
 				4CF09A3A2DAD1EF5001B0D38 /* CachedImageView.swift in Sources */,
 				4C98FE0B2DABE6DE00601764 /* NavBar.swift in Sources */,
 				4C98FE0C2DABE6DE00601764 /* Profile.swift in Sources */,
+				993A70262FD59C9D00CCEB3B /* LoopingVideoView.swift in Sources */,
 				4C98FE0D2DABE6DE00601764 /* collideApp.swift in Sources */,
 				4CF09A382DAD1195001B0D38 /* UserCardDetail.swift in Sources */,
 			);
@@ -476,6 +494,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -533,6 +552,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -548,6 +568,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"collide/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = collide/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Collide.;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -580,6 +601,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"collide/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = collide/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Collide.;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
