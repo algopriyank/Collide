@@ -4,7 +4,7 @@ struct OTPInputView: View {
     @ObservedObject var viewModel: AuthViewModel
     
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 10) {
             HeaderView(title: "Enter OTP") {
                 withAnimation(.bouncy) {
                     viewModel.currentView = .phone
@@ -12,15 +12,15 @@ struct OTPInputView: View {
             }
             
             VStack(spacing: 6) {
-                HStack(spacing: 12) {
+                HStack(spacing: 8) {
                     ForEach(0..<6) { i in
                         ZStack {
                             RoundedRectangle(cornerRadius: 12)
                                 .fill(Color.gray.opacity(0.1))
-                                .frame(width: 40, height: 55)
+                                .frame(width: 38, height: 50)
                             
                             Text(i < viewModel.otp.count ? String(viewModel.otp[viewModel.otp.index(viewModel.otp.startIndex, offsetBy: i)]) : "")
-                                .font(.title2)
+                                .font(.title3)
                                 .fontWeight(.semibold)
                         }
                     }
@@ -30,9 +30,9 @@ struct OTPInputView: View {
                     .font(.caption)
                     .foregroundStyle(.gray)
             }
-            .padding(.vertical)
+            .padding(.vertical, 8)
             
-            LazyVGrid(columns: Array(repeating: GridItem(spacing: 15), count: 3), spacing: 15) {
+            LazyVGrid(columns: Array(repeating: GridItem(spacing: 10), count: 3), spacing: 10) {
                 ForEach(keypadValues) { keyValue in
                     Group {
                         if keyValue.isBack {
@@ -41,10 +41,10 @@ struct OTPInputView: View {
                             Text(keyValue.title)
                         }
                     }
-                    .font(.title2)
+                    .font(.title3)
                     .fontWeight(.semibold)
                     .frame(maxWidth: .infinity)
-                    .frame(height: 60)
+                    .frame(height: 48)
                     .background(Color.gray.opacity(0.1))
                     .clipShape(RoundedRectangle(cornerRadius: 12))
                     .contentShape(Rectangle())
@@ -64,7 +64,7 @@ struct OTPInputView: View {
                 Text("Verify")
                     .fontWeight(.semibold)
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 15)
+                    .padding(.vertical, 14)
                     .background(Color.blue)
                     .foregroundColor(.white)
                     .clipShape(Capsule())
@@ -72,7 +72,7 @@ struct OTPInputView: View {
             .disabled(!viewModel.isContinueEnabled(for: .otp))
             .opacity(viewModel.isContinueEnabled(for: .otp) ? 1 : 0.5)
             .contentShape(Rectangle())
-            .padding(.top)
+            .padding(.top, 8)
         }
     }
 } 

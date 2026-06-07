@@ -7,6 +7,8 @@ struct TrayContentView: View {
         VStack(spacing: 20) {
             ZStack {
                 switch viewModel.currentView {
+                case .welcome:
+                    EmptyView()
                 case .login:
                     LoginView(viewModel: viewModel)
                 case .nextView:

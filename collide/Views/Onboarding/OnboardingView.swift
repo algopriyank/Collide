@@ -4,11 +4,33 @@ struct OnboardingView: View {
     @ObservedObject var viewModel: AuthViewModel
     @Environment(\.colorScheme) private var colorScheme
 
-    @State private var show = false
     @State private var username = ""
 
     private let newKansasRegular = "NewKansas-Regular"
     private let newKansasExtraSwash = "NewKansasExtraSwash-LightItalic"
+
+    private func currentStageIndex(for view: CurrentView) -> Int {
+        switch view {
+        case .welcome:
+            return -1
+        case .login, .phone, .otp, .email, .nextView:
+            return 0
+        case .personalDetails, .genders:
+            return 1
+        case .preferences:
+            return 2
+        case .college:
+            return 3
+        case .photos:
+            return 4
+        case .BioInterests:
+            return 5
+        case .funQuestions:
+            return 6
+        case .finalScreen:
+            return 7
+        }
+    }
 
     var body: some View {
         ZStack {
@@ -38,14 +60,27 @@ struct OnboardingView: View {
 
             VStack(spacing: 0) {
                 
-                // MARK: Logo
+                // MARK: Logo / Progress Bar
                 VStack {
-                    HStack {
-                        Text("Collide.")
-                            .font(.custom(newKansasExtraSwash, size: 32))
-                        Spacer()
+                    if viewModel.currentView == .welcome {
+                        HStack {
+                            Text("Collide.")
+                                .font(.custom(newKansasExtraSwash, size: 32))
+                            Spacer()
+                        }
+                        .padding(.horizontal, 24)
+                    } else {
+                        let currentStage = currentStageIndex(for: viewModel.currentView)
+                        HStack(spacing: 6) {
+                            ForEach(0..<8) { index in
+                                Capsule()
+                                    .fill(index <= currentStage ? Color.blue : Color.gray.opacity(0.2))
+                                    .frame(height: 4)
+                            }
+                        }
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 14)
                     }
-                    .padding(.horizontal, 24)
                 }
                 
                 // MARK: Hero Card
@@ -67,86 +102,104 @@ struct OnboardingView: View {
                         y: 4
                     )
 
-                Spacer()
-                    .frame(height: 48)
+                Spacer() // Pushes content to the bottom
 
-                // MARK: Headline
-
-                Text("Meet the person you'll tell your friends about.")
-                    .font(.custom(newKansasRegular, size: 38))
-                    .multilineTextAlignment(.center)
-                    .lineSpacing(-4)
-                    .padding(.horizontal, 18)
-
-                Spacer()
-                    .frame(height: 20)
-
-                Text("College dating that feels like\nsomething out of a rom-com.")
-                    .font(.custom(newKansasRegular, size: 16))
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 24)
-
-                Spacer()
-                    .frame(height: 40)
-
-                // MARK: CTA
-                Spacer()
-                Button {
-                    show = true
-                } label: {
-                    HStack(spacing: 8) {
-
-                        Text("Start your story")
-
-                        Image(systemName: "arrow.right")
+                // MARK: Dynamic Onboarding Content
+                VStack(spacing: 0) {
+                    if viewModel.currentView == .welcome {
+                        welcomeDetailsView
+                    } else {
+                        TrayContentView(viewModel: viewModel)
+                            .transition(.asymmetric(
+                                insertion: .move(edge: .trailing).combined(with: .opacity),
+                                removal: .move(edge: .leading).combined(with: .opacity)
+                            ))
                     }
-                    .foregroundStyle(
-                        colorScheme == .dark ? .white : .black
-                    )
-                    .font(.title3.weight(.semibold))
-                    .frame(maxWidth: .infinity)
-                    .padding()
                 }
-                .background(
-                    RoundedRectangle(
-                        cornerRadius: 24,
-                        style: .continuous
-                    )
-                    .fill(Color.black.opacity(0.08))
-                )
-                .padding(.horizontal, 24)
-
-                Spacer()
-                    .frame(height: 24)
-
-                // MARK: Sign In
-
-                HStack(spacing: 4) {
-
-                    Text("Already have an account?")
-                        .foregroundStyle(.secondary)
-
-                    Button("Sign In") {
-                        show = true
-                    }
-                    .fontWeight(.semibold)
-                    .foregroundStyle(.primary)
-                }
-
-                Spacer()
+                .padding(.bottom, 16)
             }
-        }
-        .systemTrayView($show) {
-            TrayContentView(viewModel: viewModel)
         }
         .onAppear {
             viewModel.onCloseTray = {
-                show = false
+                withAnimation(.bouncy) {
+                    viewModel.currentView = .welcome
+                }
             }
         }
     }
-}
+
+    private var welcomeDetailsView: some View {
+        VStack(spacing: 0) {
+            Spacer()
+            // MARK: Headline
+            Text("Meet the person \nyou'll tell your \nfriends about.")
+                .font(.custom(newKansasRegular, size: 38))
+                .multilineTextAlignment(.center)
+                .lineSpacing(-4)
+                .padding(.horizontal, 18)
+
+            Spacer()
+                .frame(height: 20)
+
+            Text("College dating that feels like\nsomething out of a rom-com.")
+                .font(.custom(newKansasRegular, size: 16))
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 24)
+
+            Spacer()
+//                .frame(height: 40)
+
+            // MARK: CTA
+            Button {
+                withAnimation(.bouncy) {
+                    viewModel.currentView = .login
+                }
+            } label: {
+                HStack(spacing: 8) {
+                    Text("Start your story")
+                    Image(systemName: "arrow.right")
+                }
+                .foregroundStyle(
+                    colorScheme == .dark ? .white : .black
+                )
+                .font(.title3.weight(.semibold))
+                .frame(maxWidth: .infinity)
+                .padding()
+            }
+            .background(
+                RoundedRectangle(
+                    cornerRadius: 24,
+                    style: .continuous
+                )
+                .fill(Color.black.opacity(0.08))
+            )
+            .padding(.horizontal, 24)
+
+            Spacer()
+                .frame(height: 24)
+
+            // MARK: Sign In
+            HStack(spacing: 4) {
+                Text("Already have an account?")
+                    .foregroundStyle(.secondary)
+
+                Button("Sign In") {
+                    withAnimation(.bouncy) {
+                        viewModel.currentView = .login
+                    }
+                }
+                .fontWeight(.semibold)
+                .foregroundStyle(.primary)
+            }
+        }
+        .transition(.asymmetric(
+            insertion: .move(edge: .leading).combined(with: .opacity),
+            removal: .move(edge: .trailing).combined(with: .opacity)
+        ))
+    }
+    }
+
 
 #Preview {
     OnboardingView(viewModel: AuthViewModel())

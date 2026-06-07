@@ -4,26 +4,26 @@ struct PhoneInputView: View {
     @ObservedObject var viewModel: AuthViewModel
     
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 10) {
             HeaderView(title: "Enter Phone Number") {
                 withAnimation(.bouncy) {
                     viewModel.currentView = .login
                 }
             }
             
-            VStack(spacing: 6) {
+            VStack(spacing: 4) {
                 Text(viewModel.phoneNumber.isEmpty ? "Enter Number" : viewModel.phoneNumber)
-                    .font(.system(size: 40, weight: .bold))
+                    .font(.system(size: 36, weight: .bold))
                     .contentTransition(.numericText())
-                    .frame(height: 50)
+                    .frame(height: 44)
                 
                 Text("We'll send you an OTP to verify")
                     .font(.caption)
                     .foregroundStyle(.gray)
             }
-            .padding(.vertical)
+            .padding(.vertical, 8)
             
-            LazyVGrid(columns: Array(repeating: GridItem(spacing: 15), count: 3), spacing: 15) {
+            LazyVGrid(columns: Array(repeating: GridItem(spacing: 10), count: 3), spacing: 10) {
                 ForEach(keypadValues) { keyValue in
                     Group {
                         if keyValue.isBack {
@@ -32,10 +32,10 @@ struct PhoneInputView: View {
                             Text(keyValue.title)
                         }
                     }
-                    .font(.title2)
+                    .font(.title3)
                     .fontWeight(.semibold)
                     .frame(maxWidth: .infinity)
-                    .frame(height: 60)
+                    .frame(height: 48)
                     .background(Color.gray.opacity(0.1))
                     .clipShape(RoundedRectangle(cornerRadius: 12))
                     .contentShape(Rectangle())
@@ -55,7 +55,7 @@ struct PhoneInputView: View {
                 Text("Continue")
                     .fontWeight(.semibold)
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 15)
+                    .padding(.vertical, 14)
                     .background(Color.blue)
                     .foregroundColor(.white)
                     .clipShape(Capsule())
@@ -63,7 +63,7 @@ struct PhoneInputView: View {
             .disabled(!viewModel.isContinueEnabled(for: .phone))
             .opacity(viewModel.isContinueEnabled(for: .phone) ? 1 : 0.5)
             .contentShape(Rectangle())
-            .padding(.top)
+            .padding(.top, 8)
         }
     }
 } 

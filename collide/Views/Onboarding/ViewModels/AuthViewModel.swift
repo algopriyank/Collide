@@ -2,7 +2,7 @@ import SwiftUI
 
 class AuthViewModel: ObservableObject {
     @Published var errorMessage: String? = nil
-    @Published var currentView: CurrentView = .login
+    @Published var currentView: CurrentView = .welcome
     @Published var phoneNumber: String = ""
     @Published var otp: String = ""
     @Published var emailLoginStarted = false

@@ -3,6 +3,7 @@ import SwiftUI
 // MARK: - Enum & Structs
 
 enum CurrentView {
+    case welcome
     case login
     case nextView
     case phone

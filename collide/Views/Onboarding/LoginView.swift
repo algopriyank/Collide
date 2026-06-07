@@ -16,9 +16,11 @@ struct LoginView: View {
                     }
                 } label: {
                     Text("Continue with Phone")
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.gray.opacity(0.1))
+                        .background(Color.blue)
                         .clipShape(Capsule())
                 }
                 
@@ -28,9 +30,11 @@ struct LoginView: View {
                     }
                 } label: {
                     Text("Continue with Email")
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.gray.opacity(0.1))
+                        .background(Color.black)
                         .clipShape(Capsule())
                 }
                 
@@ -40,14 +44,21 @@ struct LoginView: View {
                             viewModel.currentView = .nextView
                         }
                     } label: {
-                        HStack {
-                            Image(systemName: "globe")
+                        HStack(spacing: 8) {
+                            Text("G")
+                                .font(.system(size: 18, weight: .black, design: .rounded))
+                                .foregroundColor(.blue)
                             Text("Google")
+                                .fontWeight(.semibold)
+                                .foregroundColor(.blue)
                         }
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.gray.opacity(0.1))
-                        .clipShape(Capsule())
+                        .background(Color.clear)
+                        .overlay(
+                            Capsule()
+                                .stroke(Color.blue, lineWidth: 1.5)
+                        )
                     }
                     
                     Button {
@@ -55,14 +66,21 @@ struct LoginView: View {
                             viewModel.currentView = .nextView
                         }
                     } label: {
-                        HStack {
+                        HStack(spacing: 8) {
                             Image(systemName: "applelogo")
+                                .font(.system(size: 18))
+                                .foregroundColor(.primary)
                             Text("Apple")
+                                .fontWeight(.semibold)
+                                .foregroundColor(.primary)
                         }
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.gray.opacity(0.1))
-                        .clipShape(Capsule())
+                        .background(Color.clear)
+                        .overlay(
+                            Capsule()
+                                .stroke(Color.primary, lineWidth: 1.5)
+                        )
                     }
                 }
             }
