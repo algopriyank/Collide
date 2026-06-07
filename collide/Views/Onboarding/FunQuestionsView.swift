@@ -20,13 +20,6 @@ struct FunQuestionsView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-                // MARK: - Header
-            HeaderView(title: "Fun Questions") {
-                withAnimation(.bouncy) {
-                    viewModel.currentView = .BioInterests
-                }
-            }
-            
             VStack(spacing: 16) {
                     // MARK: - First Question Card
                 VStack(alignment: .leading, spacing: 8) {

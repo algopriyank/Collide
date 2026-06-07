@@ -6,12 +6,6 @@ struct PersonalDetailsView: View {
     
     var body: some View {
         VStack(spacing: 20) {
-            HeaderView(title: "Personal Details") {
-                withAnimation(.bouncy) {
-                    viewModel.currentView = .email
-                }
-            }
-            
             // Modified TextField with focus state and fixed padding/styling
             TextField("Full Name", text: $viewModel.name)
                 .focused($isNameFocused)

@@ -10,23 +10,6 @@ struct CollegeView: View {
     
     var body: some View {
         VStack(spacing: 20) {
-            HStack {
-                Text("🎓 College Details")
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                Spacer()
-                Button {
-                    withAnimation(.bouncy) {
-                        viewModel.currentView = .preferences
-                    }
-                } label: {
-                    Image(systemName: "xmark.circle.fill")
-                        .font(.title)
-                        .foregroundStyle(Color.gray, Color.primary.opacity(0.1))
-                }
-            }
-            .padding(.bottom, 10)
-            
             VStack(spacing: 16) {
                 TextField("Enter college name", text: $viewModel.collegeName)
                     .focused($focusedField, equals: .collegeName)

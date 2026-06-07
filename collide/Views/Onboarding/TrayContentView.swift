@@ -49,12 +49,6 @@ struct NextCustomView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            HeaderView(title: "Welcome") {
-                withAnimation(.bouncy) {
-                    viewModel.currentView = .login
-                }
-            }
-            
             VStack(alignment: .leading, spacing: 12) {
                 Text("This is the next view")
                     .font(.largeTitle)

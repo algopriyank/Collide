@@ -5,12 +5,6 @@ struct PhoneInputView: View {
     
     var body: some View {
         VStack(spacing: 10) {
-            HeaderView(title: "Enter Phone Number") {
-                withAnimation(.bouncy) {
-                    viewModel.currentView = .login
-                }
-            }
-            
             VStack(spacing: 4) {
                 Text(viewModel.phoneNumber.isEmpty ? "Enter Number" : viewModel.phoneNumber)
                     .font(.system(size: 36, weight: .bold))

@@ -32,6 +32,74 @@ struct OnboardingView: View {
         }
     }
 
+    private func currentTitle(for view: CurrentView) -> String? {
+        switch view {
+        case .welcome:
+            return nil
+        case .login:
+            return "Login or Sign up"
+        case .nextView:
+            return "Welcome"
+        case .phone:
+            return "Enter Phone Number"
+        case .otp:
+            return "Enter OTP"
+        case .email:
+            return "Enter Email"
+        case .personalDetails:
+            return "Personal Details"
+        case .genders:
+            return "Select Gender"
+        case .preferences:
+            return "❤️ Preferences"
+        case .college:
+            return "🎓 College Details"
+        case .photos:
+            return "📸 Upload Photos"
+        case .BioInterests:
+            return "📝 Your Bio & Interests"
+        case .funQuestions:
+            return "Fun Questions"
+        case .finalScreen:
+            return nil
+        }
+    }
+
+    private func goBack() {
+        withAnimation(.bouncy) {
+            switch viewModel.currentView {
+            case .welcome:
+                break
+            case .login:
+                viewModel.currentView = .welcome
+            case .nextView:
+                viewModel.currentView = .login
+            case .phone:
+                viewModel.currentView = .login
+            case .otp:
+                viewModel.currentView = .phone
+            case .email:
+                viewModel.currentView = .login
+            case .personalDetails:
+                viewModel.currentView = .email
+            case .genders:
+                viewModel.currentView = .personalDetails
+            case .preferences:
+                viewModel.currentView = .personalDetails
+            case .college:
+                viewModel.currentView = .preferences
+            case .photos:
+                viewModel.currentView = .college
+            case .BioInterests:
+                viewModel.currentView = .photos
+            case .funQuestions:
+                viewModel.currentView = .BioInterests
+            case .finalScreen:
+                viewModel.currentView = .funQuestions
+            }
+        }
+    }
+
     var body: some View {
         ZStack {
 
@@ -60,27 +128,39 @@ struct OnboardingView: View {
 
             VStack(spacing: 0) {
                 
-                // MARK: Logo / Progress Bar
-                VStack {
-                    if viewModel.currentView == .welcome {
-                        HStack {
-                            Text("Collide.")
-                                .font(.custom(newKansasExtraSwash, size: 32))
-                            Spacer()
+                // MARK: Logo & Back Button Header
+                HStack {
+                    Text("Collide.")
+                        .font(.custom(newKansasExtraSwash, size: 32))
+                    Spacer()
+                    if viewModel.currentView != .welcome && viewModel.currentView != .finalScreen {
+                        Button(action: goBack) {
+                            Image(systemName: "chevron.backward")
+                                .font(.title3)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.primary)
+                                .padding(8)
+                                .contentShape(Rectangle())
                         }
-                        .padding(.horizontal, 24)
-                    } else {
-                        let currentStage = currentStageIndex(for: viewModel.currentView)
-                        HStack(spacing: 6) {
-                            ForEach(0..<8) { index in
-                                Capsule()
-                                    .fill(index <= currentStage ? Color.blue : Color.gray.opacity(0.2))
-                                    .frame(height: 4)
-                            }
-                        }
-                        .padding(.horizontal, 24)
-                        .padding(.vertical, 14)
                     }
+                }
+                .padding(.horizontal, 24)
+                .padding(.top, 8)
+                
+                // MARK: Progress Bar
+                if viewModel.currentView != .welcome {
+                    let currentStage = currentStageIndex(for: viewModel.currentView)
+                    HStack(spacing: 6) {
+                        ForEach(0..<8) { index in
+                            Capsule()
+                                .fill(index <= currentStage ? Color.blue : Color.gray.opacity(0.2))
+                                .frame(height: 4)
+                        }
+                    }
+                    .padding(.horizontal, 24)
+                    .padding(.vertical, 8)
+                } else {
+                    Spacer().frame(height: 14)
                 }
                 
                 // MARK: Hero Card
@@ -92,7 +172,7 @@ struct OnboardingView: View {
                             style: .continuous
                         )
                     )
-                    .padding(.top)
+                    .padding(.top, 8)
                     .frame(maxWidth: .infinity)
                     .frame(height: 240)
                     .padding(.horizontal, 18)
@@ -101,6 +181,24 @@ struct OnboardingView: View {
                         radius: 12,
                         y: 4
                     )
+
+                // MARK: Dynamic Title Below Video
+                if viewModel.currentView != .welcome, let title = currentTitle(for: viewModel.currentView) {
+                    HStack {
+                        Text(title)
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .foregroundColor(.primary)
+                        Spacer()
+                    }
+                    .padding(.horizontal, 24)
+                    .padding(.top, 18)
+                    .transition(.asymmetric(
+                        insertion: .opacity.combined(with: .move(edge: .trailing)),
+                        removal: .opacity.combined(with: .move(edge: .leading))
+                    ))
+                    .id("title_\(viewModel.currentView)")
+                }
 
                 Spacer() // Pushes content to the bottom
 

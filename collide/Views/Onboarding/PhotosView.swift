@@ -10,23 +10,6 @@ struct PhotosView: View {
         let columns = Array(repeating: GridItem(.fixed(boxSize), spacing: spacing), count: 3)
         
         return VStack(spacing: 20) {
-            HStack {
-                Text("📸 Upload Photos")
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                Spacer()
-                Button {
-                    withAnimation(.bouncy) {
-                        viewModel.currentView = .college
-                    }
-                } label: {
-                    Image(systemName: "xmark.circle.fill")
-                        .font(.title)
-                        .foregroundStyle(Color.gray, Color.primary.opacity(0.1))
-                }
-            }
-            .padding(.bottom, 10)
-            
             LazyVGrid(columns: columns, spacing: spacing) {
                 ForEach(0..<6, id: \.self) { index in
                     ZStack {

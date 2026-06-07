@@ -5,23 +5,6 @@ struct PreferencesView: View {
     
     var body: some View {
         VStack(spacing: 20) {
-            HStack {
-                Text("❤️ Preferences")
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                Spacer()
-                Button {
-                    withAnimation(.bouncy) {
-                        viewModel.currentView = .personalDetails
-                    }
-                } label: {
-                    Image(systemName: "xmark.circle.fill")
-                        .font(.title)
-                        .foregroundStyle(Color.gray, Color.primary.opacity(0.1))
-                }
-            }
-            .padding(.bottom, 10)
-            
             VStack(alignment: .leading, spacing: 10) {
                 Text("Interested In")
                     .font(.headline)

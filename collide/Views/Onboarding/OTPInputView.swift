@@ -5,12 +5,6 @@ struct OTPInputView: View {
     
     var body: some View {
         VStack(spacing: 10) {
-            HeaderView(title: "Enter OTP") {
-                withAnimation(.bouncy) {
-                    viewModel.currentView = .phone
-                }
-            }
-            
             VStack(spacing: 6) {
                 HStack(spacing: 8) {
                     ForEach(0..<6) { i in

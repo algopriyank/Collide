@@ -5,12 +5,6 @@ struct GenderView: View {
     
     var body: some View {
         VStack(spacing: 12) {
-            HeaderView(title: "Select Gender") {
-                withAnimation(.bouncy) {
-                    viewModel.currentView = .personalDetails
-                }
-            }
-            
             Text("How do you identify?")
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.gray)

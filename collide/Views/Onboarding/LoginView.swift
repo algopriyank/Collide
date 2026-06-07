@@ -4,12 +4,7 @@ struct LoginView: View {
     @ObservedObject var viewModel: AuthViewModel
     
     var body: some View {
-        VStack(spacing: 20) {
-            HeaderView(title: "Login or Sign up") {
-                viewModel.closeTray()
-            }
-            
-            VStack(spacing: 15) {
+        VStack(spacing: 15) {
                 Button {
                     withAnimation(.bouncy) {
                         viewModel.currentView = .phone
@@ -85,5 +80,4 @@ struct LoginView: View {
                 }
             }
         }
-    }
-} 
+    } 

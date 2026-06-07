@@ -7,13 +7,6 @@ struct EmailLoginView: View {
     
     var body: some View {
         VStack(spacing: 20) {
-            HeaderView(title: "Enter Email") {
-                withAnimation(.bouncy) {
-                    viewModel.currentView = .login
-                    viewModel.resetEmailLogin()
-                }
-            }
-            
             VStack(spacing: 14) {
                 TextField("you@example.com", text: $viewModel.email)
                     .focused($isEmailFocused)

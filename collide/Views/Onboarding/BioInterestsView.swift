@@ -17,13 +17,7 @@ struct BioInterestsView: View {
         ]
         
         VStack(alignment: .leading, spacing: 20) {
-            HeaderView(title: "📝 Your Bio & Interests") {
-                withAnimation(.bouncy) {
-                    viewModel.currentView = .photos
-                }
-            }
-            
-                // Bio Input
+            // Bio Input
             VStack(alignment: .leading, spacing: 12) {
                 Text("Write a little something about you")
                     .font(.headline)
