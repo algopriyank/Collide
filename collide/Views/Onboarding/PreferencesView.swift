@@ -2,6 +2,7 @@ import SwiftUI
 
 struct PreferencesView: View {
     @ObservedObject var viewModel: AuthViewModel
+    @Environment(\.colorScheme) private var colorScheme
     
     var body: some View {
         VStack(spacing: 20) {
@@ -70,8 +71,8 @@ struct PreferencesView: View {
                     .fontWeight(.semibold)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 15)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
+                    .background(colorScheme == .dark ? Color.white : Color.black)
+                    .foregroundColor(colorScheme == .dark ? .black : .white)
                     .clipShape(Capsule())
             }
             .padding(.top)

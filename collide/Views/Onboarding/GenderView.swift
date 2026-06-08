@@ -5,11 +5,6 @@ struct GenderView: View {
     
     var body: some View {
         VStack(spacing: 12) {
-            Text("How do you identify?")
-                .multilineTextAlignment(.center)
-                .foregroundStyle(.gray)
-                .padding(.bottom, 20)
-            
             LazyVGrid(columns: Array(repeating: GridItem(spacing: 15), count: 2), spacing: 15) {
                 ForEach(viewModel.genderOptions, id: \.self) { option in
                     let isSelected = viewModel.gender == option

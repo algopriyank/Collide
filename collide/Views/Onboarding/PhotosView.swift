@@ -2,6 +2,7 @@ import SwiftUI
 
 struct PhotosView: View {
     @ObservedObject var viewModel: AuthViewModel
+    @Environment(\.colorScheme) private var colorScheme
     
     var body: some View {
         let boxSize: CGFloat = 100
@@ -71,8 +72,8 @@ struct PhotosView: View {
                     .fontWeight(.semibold)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 15)
-                    .background(viewModel.isContinueEnabled(for: .photos) ? Color.blue : Color.gray)
-                    .foregroundColor(.white)
+                    .background(viewModel.isContinueEnabled(for: .photos) ? (colorScheme == .dark ? Color.white : Color.black) : Color.gray)
+                    .foregroundColor(viewModel.isContinueEnabled(for: .photos) ? (colorScheme == .dark ? .black : .white) : .white)
                     .clipShape(Capsule())
             }
             .disabled(!viewModel.isContinueEnabled(for: .photos))

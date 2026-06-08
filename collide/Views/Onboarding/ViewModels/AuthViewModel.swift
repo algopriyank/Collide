@@ -10,6 +10,14 @@ class AuthViewModel: ObservableObject {
     @Published var password: String = ""
     @Published var name: String = ""
     @Published var dob: Date = Date()
+    @Published var birthdayText: String = "" {
+        didSet {
+            if let date = parseBirthday(birthdayText) {
+                dob = date
+            }
+        }
+    }
+    @Published var showBirthdayPublicly: Bool = true
     @Published var gender: String = ""
     @Published var pronouns: String = ""
     @Published var showGenderPicker: Bool = false
@@ -40,8 +48,21 @@ class AuthViewModel: ObservableObject {
     // Events/Callbacks
     var onCloseTray: (() -> Void)?
     
-    let pronounOptions = ["he/him", "she/her", "they/them", "ze/zir", "prefer not to say"]
-    let genderOptions = ["Male", "Female", "Non-binary", "Other", "Prefer not to say"]
+    let pronounOptions = ["he/him", "she/her", "they/them"]
+    let genderOptions = ["Woman", "Man", "Non-binary"]
+    
+    func parseBirthday(_ text: String) -> Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        formatter.calendar = Calendar(identifier: .gregorian)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.isLenient = false
+        
+        let cleanText = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard cleanText.count == 10 else { return nil }
+        return formatter.date(from: cleanText)
+    }
     
     // Function to close the tray
     func closeTray() {
@@ -122,7 +143,7 @@ class AuthViewModel: ObservableObject {
             }
             return !email.isEmpty
         case .personalDetails:
-            return !name.isEmpty && !gender.isEmpty
+            return !name.isEmpty && !gender.isEmpty && parseBirthday(birthdayText) != nil
         case .photos:
             return selectedImages.contains(where: { $0 != nil })
         case .BioInterests:

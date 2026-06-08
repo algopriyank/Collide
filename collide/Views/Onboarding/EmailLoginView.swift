@@ -4,6 +4,7 @@ struct EmailLoginView: View {
     @ObservedObject var viewModel: AuthViewModel
     @FocusState private var isEmailFocused: Bool
     @FocusState private var isPasswordFocused: Bool
+    @Environment(\.colorScheme) private var colorScheme
     
     var body: some View {
         VStack(spacing: 20) {
@@ -41,8 +42,8 @@ struct EmailLoginView: View {
                     .fontWeight(.semibold)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 15)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
+                    .background(colorScheme == .dark ? Color.white : Color.black)
+                    .foregroundColor(colorScheme == .dark ? .black : .white)
                     .clipShape(Capsule())
             }
             .disabled(!viewModel.isContinueEnabled(for: .email))

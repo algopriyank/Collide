@@ -2,6 +2,7 @@ import SwiftUI
 
 struct OTPInputView: View {
     @ObservedObject var viewModel: AuthViewModel
+    @Environment(\.colorScheme) private var colorScheme
     
     var body: some View {
         VStack(spacing: 10) {
@@ -14,8 +15,7 @@ struct OTPInputView: View {
                                 .frame(width: 38, height: 50)
                             
                             Text(i < viewModel.otp.count ? String(viewModel.otp[viewModel.otp.index(viewModel.otp.startIndex, offsetBy: i)]) : "")
-                                .font(.title3)
-                                .fontWeight(.semibold)
+                                .font(.custom("NewKansas-Regular", size: 24))
                         }
                     }
                 }
@@ -31,12 +31,13 @@ struct OTPInputView: View {
                     Group {
                         if keyValue.isBack {
                             Image(systemName: keyValue.title)
+                                .font(.title3)
+                                .fontWeight(.semibold)
                         } else {
                             Text(keyValue.title)
+                                .font(.custom("NewKansas-Regular", size: 24))
                         }
                     }
-                    .font(.title3)
-                    .fontWeight(.semibold)
                     .frame(maxWidth: .infinity)
                     .frame(height: 48)
                     .background(Color.gray.opacity(0.1))
@@ -59,8 +60,8 @@ struct OTPInputView: View {
                     .fontWeight(.semibold)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 14)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
+                    .background(colorScheme == .dark ? Color.white : Color.black)
+                    .foregroundColor(colorScheme == .dark ? .black : .white)
                     .clipShape(Capsule())
             }
             .disabled(!viewModel.isContinueEnabled(for: .otp))

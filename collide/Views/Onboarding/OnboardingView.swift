@@ -186,8 +186,7 @@ struct OnboardingView: View {
                 if viewModel.currentView != .welcome, let title = currentTitle(for: viewModel.currentView) {
                     HStack {
                         Text(title)
-                            .font(.title2)
-                            .fontWeight(.bold)
+                            .font(.custom(newKansasRegular, size: 28))
                             .foregroundColor(.primary)
                         Spacer()
                     }

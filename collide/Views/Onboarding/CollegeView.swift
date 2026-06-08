@@ -3,6 +3,7 @@ import SwiftUI
 struct CollegeView: View {
     @ObservedObject var viewModel: AuthViewModel
     @FocusState private var focusedField: Field?
+    @Environment(\.colorScheme) private var colorScheme
     
     enum Field: Hashable {
         case collegeName, registrationNumber, location
@@ -52,8 +53,8 @@ struct CollegeView: View {
                     .fontWeight(.semibold)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 15)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
+                    .background(colorScheme == .dark ? Color.white : Color.black)
+                    .foregroundColor(colorScheme == .dark ? .black : .white)
                     .clipShape(Capsule())
             }
             .padding(.top)

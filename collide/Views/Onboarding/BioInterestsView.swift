@@ -2,6 +2,7 @@ import SwiftUI
 
 struct BioInterestsView: View {
     @ObservedObject var viewModel: AuthViewModel
+    @Environment(\.colorScheme) private var colorScheme
     
     let interests = [
         "Hip-hop", "Indie", "EDM", "Netflix", "Anime", "K-Dramas",
@@ -77,8 +78,8 @@ struct BioInterestsView: View {
                     .fontWeight(.semibold)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 15)
-                    .background(viewModel.isContinueEnabled(for: .funQuestions) ? Color.blue : Color.gray)
-                    .foregroundColor(.white)
+                    .background(viewModel.isContinueEnabled(for: .funQuestions) ? (colorScheme == .dark ? Color.white : Color.black) : Color.gray)
+                    .foregroundColor(viewModel.isContinueEnabled(for: .funQuestions) ? (colorScheme == .dark ? .black : .white) : .white)
                     .clipShape(Capsule())
             }
             .disabled(!viewModel.isContinueEnabled(for: .funQuestions))

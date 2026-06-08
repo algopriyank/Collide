@@ -2,6 +2,7 @@ import SwiftUI
 
 struct FunQuestionsView: View {
     @ObservedObject var viewModel: AuthViewModel
+    @Environment(\.colorScheme) private var colorScheme
     
     let allQuestions = [
         "Two truths and a lie 🤯",
@@ -90,10 +91,11 @@ struct FunQuestionsView: View {
                 }
             }) {
                 Text("Continue")
+                    .fontWeight(.semibold)
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(canContinue ? Color.blue : Color.gray)
-                    .foregroundColor(.white)
+                    .background(canContinue ? (colorScheme == .dark ? Color.white : Color.black) : Color.gray)
+                    .foregroundColor(canContinue ? (colorScheme == .dark ? .black : .white) : .white)
                     .cornerRadius(12)
             }
             .disabled(!canContinue)
