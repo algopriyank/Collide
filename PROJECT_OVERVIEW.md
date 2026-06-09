@@ -39,7 +39,7 @@ PersonalDetailsView (Name, DOB, Gender, Pronouns)
     ↓
 PreferencesView (Looking for, Interested in)
     ↓
-CollegeView (College name, registration number, location)
+CollegeView (College name, student email, location)
     ↓
 PhotosView (Upload up to 6 photos)
     ↓
@@ -133,7 +133,7 @@ Tap card → Navigate to UserCardDetail
     - `interestedIn: String` - Dating preferences
     - `lookingFor: String` - Relationship type
     - `collegeName: String` - College name
-    - `registrationNumber: String` - Student ID
+    - `studentEmail: String` - Student email address
     - `location: String` - Location
     - `selectedImages: [UIImage?]` - Up to 6 photos
     - `bio: String` - User bio
@@ -242,7 +242,7 @@ Tap card → Navigate to UserCardDetail
 
 - **`Views/Onboarding/CollegeView.swift`** - College information
   - College name
-  - Registration number
+  - Student email
   - Location
 
 - **`Views/Onboarding/PhotosView.swift`** - Photo upload
@@ -482,7 +482,7 @@ pronouns: String
 interestedIn: String
 lookingFor: String
 collegeName: String
-registrationNumber: String
+studentEmail: String
 location: String
 bio: String
 

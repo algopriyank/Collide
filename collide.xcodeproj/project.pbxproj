@@ -55,6 +55,10 @@
 		993A70262FD59C9D00CCEB3B /* LoopingVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993A70252FD59C9000CCEB3B /* LoopingVideoView.swift */; };
 		993A70282FD5A23800CCEB3B /* romcom_loop.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 993A70272FD5A23800CCEB3B /* romcom_loop.mp4 */; };
 		993A702A2FD5A4F800CCEB3B /* New-Kansas-ExtraSwash-Light-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 993A70292FD5A4F800CCEB3B /* New-Kansas-ExtraSwash-Light-Italic.otf */; };
+		99955C812FD81CFB00D17156 /* CollegeAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99955C802FD81CFB00D17156 /* CollegeAPIService.swift */; };
+		9E28F191C76BE3AF94232ACF /* CollegeSuggestionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009B5FB8D9FBDD88D050E9C /* CollegeSuggestionListView.swift */; };
+		BD7EE7D99499BFCF12C11C86 /* CustomTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BCA06C871D8F4735080B21 /* CustomTextFieldStyle.swift */; };
+		D3B2DC05C5DB1FC4DF190EB0 /* SelectionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62E13753A5F53C3FF8B1E4CB /* SelectionCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,11 +101,15 @@
 		4CCCB7342DA3CD4B009FCE1E /* collide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = collide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CF09A372DAD1195001B0D38 /* UserCardDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardDetail.swift; sourceTree = "<group>"; };
 		4CF09A392DAD1EF5001B0D38 /* CachedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageView.swift; sourceTree = "<group>"; };
+		62E13753A5F53C3FF8B1E4CB /* SelectionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionCardView.swift; sourceTree = "<group>"; };
 		993A70092FD4E51100CCEB3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		993A700C2FD57D8E00CCEB3B /* New-Kansas-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "New-Kansas-Regular.otf"; sourceTree = "<group>"; };
 		993A70252FD59C9000CCEB3B /* LoopingVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopingVideoView.swift; sourceTree = "<group>"; };
 		993A70272FD5A23800CCEB3B /* romcom_loop.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = romcom_loop.mp4; sourceTree = "<group>"; };
 		993A70292FD5A4F800CCEB3B /* New-Kansas-ExtraSwash-Light-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "New-Kansas-ExtraSwash-Light-Italic.otf"; sourceTree = "<group>"; };
+		99955C802FD81CFB00D17156 /* CollegeAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeAPIService.swift; sourceTree = "<group>"; };
+		D0BCA06C871D8F4735080B21 /* CustomTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldStyle.swift; sourceTree = "<group>"; };
+		F009B5FB8D9FBDD88D050E9C /* CollegeSuggestionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeSuggestionListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +206,9 @@
 		4C53A6FE2DC9CCDB001AB288 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				F009B5FB8D9FBDD88D050E9C /* CollegeSuggestionListView.swift */,
+				D0BCA06C871D8F4735080B21 /* CustomTextFieldStyle.swift */,
+				62E13753A5F53C3FF8B1E4CB /* SelectionCardView.swift */,
 				4C53A6FC2DC9CCDB001AB288 /* HeaderView.swift */,
 				4C53A6FD2DC9CCDB001AB288 /* TrayView.swift */,
 			);
@@ -215,6 +226,7 @@
 		4C98FDE92DABE6DE00601764 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				99955C802FD81CFB00D17156 /* CollegeAPIService.swift */,
 				4C98FDE82DABE6DE00601764 /* SupabaseService.swift */,
 				4C54344E2DAD0B3F00FAAEFB /* AppError.swift */,
 				4C2428962DB52A8F00000AC2 /* SupabaseManager.swift */,
@@ -392,10 +404,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E28F191C76BE3AF94232ACF /* CollegeSuggestionListView.swift in Sources */,
+				BD7EE7D99499BFCF12C11C86 /* CustomTextFieldStyle.swift in Sources */,
+				D3B2DC05C5DB1FC4DF190EB0 /* SelectionCardView.swift in Sources */,
 				4C53A70F2DC9CCDB001AB288 /* TrayView.swift in Sources */,
 				4C53A7102DC9CCDB001AB288 /* LoginView.swift in Sources */,
 				4C53A7112DC9CCDB001AB288 /* AuthViewModel.swift in Sources */,
 				4C53A7122DC9CCDB001AB288 /* PhoneInputView.swift in Sources */,
+				99955C812FD81CFB00D17156 /* CollegeAPIService.swift in Sources */,
 				4C53A7132DC9CCDB001AB288 /* EmailLoginView.swift in Sources */,
 				4C53A7142DC9CCDB001AB288 /* FinalScreenView.swift in Sources */,
 				4C53A7152DC9CCDB001AB288 /* PhotosView.swift in Sources */,

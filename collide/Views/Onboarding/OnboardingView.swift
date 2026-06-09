@@ -5,6 +5,7 @@ struct OnboardingView: View {
     @Environment(\.colorScheme) private var colorScheme
 
     @State private var username = ""
+    @State private var isKeyboardVisible = false
 
     private let newKansasRegular = "NewKansas-Regular"
     private let newKansasExtraSwash = "NewKansasExtraSwash-LightItalic"
@@ -109,6 +110,9 @@ struct OnboardingView: View {
                     ? Color.black
                     : Color(red: 0.96, green: 0.94, blue: 0.88))
                     .ignoresSafeArea()
+                    .onTapGesture {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    }
 
                 LinearGradient(
                     colors: colorScheme == .dark
@@ -165,22 +169,28 @@ struct OnboardingView: View {
                 
                 // MARK: Hero Card
 
-                LoopingVideoView(videoName: "romcom_loop")
-                    .clipShape(
-                        RoundedRectangle(
-                            cornerRadius: 32,
-                            style: .continuous
+                if !isKeyboardVisible {
+                    LoopingVideoView(videoName: "romcom_loop")
+                        .clipShape(
+                            RoundedRectangle(
+                                cornerRadius: 32,
+                                style: .continuous
+                            )
                         )
-                    )
-                    .padding(.top, 8)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 240)
-                    .padding(.horizontal, 18)
-                    .shadow(
-                        color: .black.opacity(0.04),
-                        radius: 12,
-                        y: 4
-                    )
+                        .padding(.top, 8)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 240)
+                        .padding(.horizontal, 18)
+                        .shadow(
+                            color: .black.opacity(0.04),
+                            radius: 12,
+                            y: 4
+                        )
+                        .transition(.asymmetric(
+                            insertion: .opacity.combined(with: .scale(scale: 0.95)),
+                            removal: .opacity.combined(with: .scale(scale: 0.95))
+                        ))
+                }
 
                 // MARK: Dynamic Title Below Video
                 if viewModel.currentView != .welcome, let title = currentTitle(for: viewModel.currentView) {
@@ -191,7 +201,7 @@ struct OnboardingView: View {
                         Spacer()
                     }
                     .padding(.horizontal, 24)
-                    .padding(.top, 18)
+                    .padding(.top, isKeyboardVisible ? 4 : 18)
                     .transition(.asymmetric(
                         insertion: .opacity.combined(with: .move(edge: .trailing)),
                         removal: .opacity.combined(with: .move(edge: .leading))
@@ -221,6 +231,16 @@ struct OnboardingView: View {
                 withAnimation(.bouncy) {
                     viewModel.currentView = .welcome
                 }
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { _ in
+            withAnimation(.easeInOut(duration: 0.25)) {
+                isKeyboardVisible = true
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in
+            withAnimation(.easeInOut(duration: 0.25)) {
+                isKeyboardVisible = false
             }
         }
     }
@@ -292,7 +312,7 @@ struct OnboardingView: View {
         }
         .transition(.asymmetric(
             insertion: .move(edge: .leading).combined(with: .opacity),
-            removal: .move(edge: .trailing).combined(with: .opacity)
+            removal: .move(edge: .leading).combined(with: .opacity)
         ))
     }
     }

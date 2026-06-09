@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 
 class AuthViewModel: ObservableObject {
     @Published var errorMessage: String? = nil
@@ -25,8 +26,15 @@ class AuthViewModel: ObservableObject {
     @Published var interestedIn: String = ""
     @Published var lookingFor: String = ""
     @Published var collegeName: String = ""
-    @Published var registrationNumber: String = ""
+    @Published var studentEmail: String = ""
     @Published var location: String = ""
+    
+    // College Search API integration properties
+    @Published var collegeSearchQuery: String = ""
+    @Published var collegeSearchResults: [CollegeResult] = []
+    @Published var isSearchingColleges: Bool = false
+    
+    private var cancellables = Set<AnyCancellable>()
     @Published var selectedImages: [UIImage?] = Array(repeating: nil, count: 6)
     @Published var showingImagePicker = false
     @Published var selectedImageIndex: Int? = nil
@@ -43,6 +51,7 @@ class AuthViewModel: ObservableObject {
     
     init() {
         self.onboardingComplete = UserDefaults.standard.bool(forKey: "onboardingComplete")
+        setupCollegeSearch()
     }
     
     // Events/Callbacks
@@ -144,12 +153,64 @@ class AuthViewModel: ObservableObject {
             return !email.isEmpty
         case .personalDetails:
             return !name.isEmpty && !gender.isEmpty && parseBirthday(birthdayText) != nil
+        case .preferences:
+            return !interestedIn.isEmpty && !lookingFor.isEmpty
         case .photos:
             return selectedImages.contains(where: { $0 != nil })
         case .BioInterests:
             return selectedInterests.count >= 5
+        case .college:
+            return !collegeName.isEmpty && isValidEmail(studentEmail) && !location.isEmpty
         default:
             return true
+        }
+    }
+    
+    // Email Validation Helper
+    func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
+    }
+    
+    private func setupCollegeSearch() {
+        $collegeSearchQuery
+            .debounce(for: .seconds(0.3), scheduler: RunLoop.main)
+            .removeDuplicates()
+            .sink { [weak self] query in
+                guard let self = self else { return }
+                
+                let cleanQuery = query.trimmingCharacters(in: .whitespacesAndNewlines)
+                guard cleanQuery.count >= 2 else {
+                    self.collegeSearchResults = []
+                    return
+                }
+                
+                // If it already matches the canonical college name, don't trigger a new search
+                guard cleanQuery != self.collegeName else {
+                    return
+                }
+                
+                Task {
+                    await self.performCollegeSearch(query: cleanQuery)
+                }
+            }
+            .store(in: &cancellables)
+    }
+    
+    @MainActor
+    private func performCollegeSearch(query: String) async {
+        isSearchingColleges = true
+        defer { isSearchingColleges = false }
+        
+        do {
+            let results = try await CollegeAPIService.shared.searchColleges(query: query)
+            if self.collegeSearchQuery.trimmingCharacters(in: .whitespacesAndNewlines) == query {
+                self.collegeSearchResults = results
+            }
+        } catch {
+            print("Error searching colleges: \(error.localizedDescription)")
+            self.collegeSearchResults = []
         }
     }
 } 
